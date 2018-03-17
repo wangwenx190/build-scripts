@@ -10,7 +10,7 @@ A Windows batch script file to compile Qt from source code. You must know that t
 *Example*
 
 ```bat
-CALL "C:\Qt\build-qt.bat" x64 dll release "C:\Qt\src" "C"\Qt\msvc2017_64"
+CALL "C:\Qt\build-qt.bat" x86 lib debug-and-release "C:\Qt\src" "C:\Qt\msvc2017_Static_64" -force-debug-info
 ```
 
 **Tested on**
