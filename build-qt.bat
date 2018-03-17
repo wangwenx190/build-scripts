@@ -1,8 +1,8 @@
 @ECHO OFF
 COLOR
 TITLE Building Qt from source code
-SETLOCAL EnableDelayedExpansion
 CLS
+SETLOCAL EnableDelayedExpansion
 REM x86 or x64, default is x64
 SET "_TARGET_ARCH=%1"
 REM dll or lib, default is dll
@@ -33,6 +33,7 @@ REM According to Qt official wiki, QWebEngine module cannot be compiled statical
     SET "_BUILD_TYPE=-static -static-runtime -skip qtwebengine"
 ) ELSE (
 REM If you want to compile QWebEngine, you have to changed your system locale to English(United States)
+REM And don't forget to change it back after compiling Qt
     SET "_BUILD_TYPE=-shared"
 )
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform win32-msvc -ltcg -plugin-manifests -mp -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
