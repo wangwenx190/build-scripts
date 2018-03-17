@@ -41,7 +41,7 @@ CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary
 SET "PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%PATH%"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 CD /D "%_ROOT%"
-SET "_ROOT="
+SET _ROOT=
 CALL "%_CFG_BAT%" %_CFG_PARAMS%
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
