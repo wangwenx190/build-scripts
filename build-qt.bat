@@ -36,8 +36,18 @@ IF /I "%_BUILD_TYPE%" == "lib" (
     REM And don't forget to change it back after compiling Qt
     SET "_BUILD_TYPE=-shared"
 )
+SET _VC_CMD=
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" SET "_VC_CMD=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" && GOTO Bld
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" SET "_VC_CMD=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" && GOTO Bld
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" SET "_VC_CMD=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" && GOTO Bld
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" SET "_VC_CMD=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" && GOTO Bld
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat" SET "_VC_CMD=C:\Program Files (x86)\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat" && GOTO Bld
+GOTO Bld
+
+:Bld
+IF /I "%_VC_CMD%" == "" ECHO Cannot find "vcvarsall.bat", maybe you forget to add VC dir to the PATH variable. && GOTO Fin
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform win32-msvc -ltcg -plugin-manifests -mp -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
-CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %_TARGET_ARCH%
+CALL "%_VC_CMD%" %_TARGET_ARCH%
 SET "PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%PATH%"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 CD /D "%_ROOT%"
