@@ -49,7 +49,7 @@ REM from it's official download link:
 REM download.qt.io/official_releases/jom/jom.zip
 REM Remember to add it's path to your system path variables
 REM or just put it into "src\gnuwin32\bin", this directory will be added to
-REM the PATH variable temporarily during the compiling stage.
+REM the PATH variable temporarily during the compiling process.
 SET "_JOM=nmake"
 IF EXIST "jom.exe" SET "_JOM=jom"
 %_JOM% && %_JOM% install

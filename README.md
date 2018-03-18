@@ -4,8 +4,28 @@ A Windows batch script file to compile Qt from source code. You must know that t
 
 **Usage**
 
-1. Open cmd or power shell
-2. CALL script-file-path ARCH(x86 or x64, default is x64) TYPE(dll or lib, default is dll) MODE(debug, release or debug-and-release, default is release) SRC-DIR(Qt source code dir, default is ".\src") INSTALL-DIR(Qt install dir, default is ".\qt") EXTRA-PARAMS(Extra parameters you want to pass to the config program, default is empty)
+1. Open cmd or power shell.
+2. CALL "script-file-path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6]
+   - script-file-path: the relative/absolute path of the batch file
+   - Option1: target arch, x86 or x64, default is x64
+   - Option2: target file type, dll or lib, default is dll
+   - Option3: compile mode, debug, release or debug-and-release, default is release
+   - Option4: Qt source code dir, default is ".\src"
+   - Option5: Qt install dir, default is ".\qt"
+   - Option6: Extra parameters you want to pass to the config program, default is empty
+3. If all the prerequisites are installed correctly, the compiling process will start automatically and there is no more to do manually, the compiler will do all the rest things. The whole compiling process may take many hours, perhaps you should leave your computer and do some interesting things.
+4. If you want to link Qt against [ICU](http://site.icu-project.org/) and [OpenSSL](https://www.openssl.org/) libraries, you will have to change the script file. Please add the following config parameters:
+   - ICU:
+     ```bat
+     -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS_DEBUG="-licudtd -licuind -licuucd" ICU_LIBS_RELEASE="-licudt -licuin -licuuc"
+     ```
+   - OpenSSL:
+     ```bat
+     -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS_DEBUG="-lssleay32d -llibeay32d" OPENSSL_LIBS_RELEASE="-lssleay32 -llibeay32"
+     ```
+   Notes:
+   - "%_ICU_DIR%" and "%_OPENSSL_DIR%" are the directories that contain "bin", "lib" and "include" directories of ICU and OpenSSL, remember to set them in the batch script.
+   - ICU will increase the size of your application for about 40MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
 
 *Example*
 
