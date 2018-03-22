@@ -32,7 +32,7 @@ IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
     SET "_BUILD_TYPE=-static -static-runtime -skip qtwebengine"
 ) ELSE (
-    REM If you want to compile QWebEngine, you have to changed your system locale to English(United States)
+    REM If you want to compile QWebEngine, you have to change your system locale to English(United States)
     REM And don't forget to change it back after compiling Qt
     SET "_BUILD_TYPE=-shared"
 )
