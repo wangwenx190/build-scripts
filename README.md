@@ -28,7 +28,7 @@ A Windows batch script file to compile Qt from source code. You must know that t
    - ICU will increase the size of your application for about 40MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
    - **If you want to compile QWebEngine, you have to changed your system locale to English(United States)** and don't forget to change it back after compiling Qt.
    - According to Qt official wiki, **QWebEngine module cannot be compiled statically**.
-   - nmake(provided by VS) is very slow, I recommend you use [jom](download.qt.io/official_releases/jom/jom.zip).
+   - nmake(provided by VS) is very slow, I recommend you use [jom](https://download.qt.io/official_releases/jom/jom.zip).
 
 *Example*
 
