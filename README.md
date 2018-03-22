@@ -1,13 +1,13 @@
 ## build-qt.bat
-A Windows batch script to compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
+A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
 
 **Usage**
 1. Open cmd or power shell.
 2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6]
-   - Script file path: the relative/absolute path of the batch file
-   - Option1: target arch, x86 or x64, default is x64
-   - Option2: target file type, dll or lib, default is dll
-   - Option3: compile mode, debug, release or debug-and-release, default is release
+   - Script file path: The relative/absolute path of the batch file
+   - Option1: Target architecture, x86 or x64, default is x64
+   - Option2: Target file type, dll or lib, default is dll
+   - Option3: Compile mode, debug, release or debug-and-release, default is release
    - Option4: Qt source code dir, default is ".\src"
    - Option5: Qt install dir, default is ".\qt"
    - Option6: Extra parameters you want to pass to the config program, default is empty
@@ -47,7 +47,7 @@ A Windows batch script to help you deploy your Qt applications. This script is m
 **Usage**
 1. Open cmd or power shell.
 2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4]
-   - Script file path: the relative/absolute path of the batch file
+   - Script file path: The relative/absolute path of the batch file
    - Option1: The install directory's path of Qt (not the "bin" directory, it's the host directory)
    - Option2: The path of your application's executable file
    - Option3: The path of the directory of your application's executable file
@@ -57,3 +57,9 @@ A Windows batch script to help you deploy your Qt applications. This script is m
 ```bat
 CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\Code\MyApp\bin64\release\app.exe" "C:\Code\MyApp\bin64\release" qml(or anything else you like)
 ```
+
+**Tested on**
+
+Windows 10 + MSVC 2017 + Qt 5.11.0
+
+(Theoretically, this batch script supports Qt 5.x and newer.)
