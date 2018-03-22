@@ -2,7 +2,7 @@
 COLOR
 TITLE Deploying application
 CLS
-SETLOCAL
+SETLOCAL EnableDelayedExpansion
 SET "_QT_DIR=%1"
 IF /I "%_QT_DIR%" == "" ECHO Qt install dir not found && GOTO Fin
 SET "_EXE_FILE=%2"
@@ -37,7 +37,10 @@ ECHO Plugins=plugins>>"%_CONF_FILE%"
 ECHO Imports=imports>>"%_CONF_FILE%"
 ECHO Qml2Imports=qml>>"%_CONF_FILE%"
 ECHO Translations=languages>>"%_CONF_FILE%"
-ECHO Deployment completed, press any key to exit this batch script
+TITLE Finished
+CLS
+ECHO Deploying process have completed successfully
+ECHO Press any key to exit this batch script
 GOTO Fin
 
 :Fin
