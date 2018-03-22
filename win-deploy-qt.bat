@@ -15,9 +15,14 @@ IF /I "%4" == "" (
     SET _DEP_PARAMS=--dir "%_APP_DIR%\qml" --libdir "%_APP_DIR%" --plugindir "%_APP_DIR%\plugins" --force --qmldir "%_QT_DIR%\qml" --compiler-runtime "%_EXE_FILE%"
 )
 SET "PATH=%_QT_DIR%\bin;%PATH%"
+IF EXIST "%_APP_DIR%\plugins" RD /S /Q "%_APP_DIR%\plugins"
+IF EXIST "%_APP_DIR%\qml" RD /S /Q "%_APP_DIR%\qml"
+IF EXIST "%_APP_DIR%\translations" RD /S /Q "%_APP_DIR%\translations"
+IF EXIST "%_APP_DIR%\languages" RD /S /Q "%_APP_DIR%\languages"
+IF EXIST "%_APP_DIR%\Qt*.dll" DEL /F /Q "%_APP_DIR%\Qt*.dll"
+IF EXIST "%_APP_DIR%\qt.conf" DEL /F /Q "%_APP_DIR%\qt.conf"
 windeployqt %_DEP_PARAMS%
 IF EXIST "%_APP_DIR%\qml\translations" (
-    IF EXIST "%_APP_DIR%\languages" RD /S /Q "%_APP_DIR%\languages"
     MD "%_APP_DIR%\languages"
     COPY /Y "%_APP_DIR%\qml\translations\*" "%_APP_DIR%\languages"
     RD /S /Q "%_APP_DIR%\qml\translations"
@@ -29,7 +34,6 @@ IF EXIST "%_APP_DIR%\qml\translations" (
 )
 IF %ERRORLEVEL% NEQ 0 ECHO Something wrong happened, deploying process aborted && GOTO Fin
 SET "_CONF_FILE=%_APP_DIR%\qt.conf"
-IF EXIST "%_CONF_FILE%" DEL /F /Q "%_CONF_FILE%"
 ECHO [Paths]>"%_CONF_FILE%"
 ECHO Binaries=.>>"%_CONF_FILE%"
 ECHO Libraries=.>>"%_CONF_FILE%"
