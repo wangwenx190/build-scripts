@@ -1,5 +1,5 @@
 ## build-qt.bat
-A Windows batch script file to compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
+A Windows batch script to compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
 
 **Usage**
 1. Open cmd or power shell.
@@ -40,3 +40,20 @@ CALL "C:\Qt\build-qt.bat" x86 lib debug-and-release "C:\Qt\src" "C:\Qt\msvc2017_
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
 (Theoretically, this batch script supports Qt 5.7.x and newer.)
+
+## win-deploy-qt.bat
+A Windows batch script to help you deploy your Qt applications. This script is mainly designed for my personal use, but everyone can use it normally as well (if you don't have any special requirements).
+
+**Usage**
+1. Open cmd or power shell.
+2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4]
+   - Script file path: the relative/absolute path of the batch file
+   - Option1: The install directory's path of Qt (not the "bin" directory, it's the host directory)
+   - Option2: The path of your application's executable file
+   - Option3: The path of the directory of your application's executable file
+   - Option4: If your application is not an Qt Quick application, leave this option empty
+
+*Example*
+```bat
+CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\Code\MyApp\bin64\release\app.exe" "C:\Code\MyApp\bin64\release" qml(or anything else you like)
+```
