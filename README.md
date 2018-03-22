@@ -1,9 +1,7 @@
 ## build-qt.bat
-
 A Windows batch script file to compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
 
 **Usage**
-
 1. Open cmd or power shell.
 2. CALL "script-file-path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6]
    - script-file-path: the relative/absolute path of the batch file
@@ -26,18 +24,18 @@ A Windows batch script file to compile Qt from source code. You must know that t
    Notes:
    - "%_ICU_DIR%" and "%_OPENSSL_DIR%" are the directories that contain "bin", "lib" and "include" directories of ICU and OpenSSL, remember to set them in the batch script.
    - ICU will increase the size of your application for about 40MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
-   - **If you want to compile QWebEngine, you have to changed your system locale to English(United States)** and don't forget to change it back after compiling Qt.
-   - According to Qt official wiki, **QWebEngine module cannot be compiled statically**.
-   - nmake(provided by VS) is very slow, I recommend you use [jom](https://download.qt.io/official_releases/jom/jom.zip).
+
+Notes:
+- **If you want to compile QWebEngine, you have to changed your system locale to English(United States)** and don't forget to change it back after compiling Qt.
+- According to Qt official wiki, **QWebEngine module cannot be compiled statically**.
+- nmake(provided by VS) is very slow, I recommend you use [jom](https://download.qt.io/official_releases/jom/jom.zip).
 
 *Example*
-
 ```bat
 CALL "C:\Qt\build-qt.bat" x86 lib debug-and-release "C:\Qt\src" "C:\Qt\msvc2017_Static_64" -force-debug-info
 ```
 
 **Tested on**
-
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
 (Theoretically, this batch script supports Qt 5.7.x and newer.)
