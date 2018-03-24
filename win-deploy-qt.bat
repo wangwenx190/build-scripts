@@ -23,18 +23,31 @@ IF EXIST "%_APP_DIR%\Qt*.dll" DEL /F /Q "%_APP_DIR%\Qt*.dll"
 IF EXIST "%_APP_DIR%\qt.conf" DEL /F /Q "%_APP_DIR%\qt.conf"
 windeployqt %_DEP_PARAMS%
 IF EXIST "%_APP_DIR%\qml\translations" (
-    MD "%_APP_DIR%\languages"
-    COPY /Y "%_APP_DIR%\qml\translations\*" "%_APP_DIR%\languages"
-    RD /S /Q "%_APP_DIR%\qml\translations"
+    MOVE /Y "%_APP_DIR%\qml\translations" "%_APP_DIR%\languages"
 ) ELSE (
     IF EXIST "%_APP_DIR%\translations" (
         CD /D "%_APP_DIR%"
         REN "translations" "languages"
     )
 )
+IF EXIST "%_APP_DIR%\plugins\platforms" (
+    IF EXIST "%_APP_DIR%\plugins\platforms\qwindowsd.dll" (
+        COPY /Y "%_QT_DIR%\plugins\platforms\qdirect2dd.dll" "%_APP_DIR%\plugins\platforms\qdirect2dd.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qminimald.dll" "%_APP_DIR%\plugins\platforms\qminimald.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qoffscreend.dll" "%_APP_DIR%\plugins\platforms\qoffscreend.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qwebgld.dll" "%_APP_DIR%\plugins\platforms\qwebgld.dll"
+    )
+    IF EXIST "%_APP_DIR%\plugins\platforms\qwindows.dll" (
+        COPY /Y "%_QT_DIR%\plugins\platforms\qdirect2d.dll" "%_APP_DIR%\plugins\platforms\qdirect2d.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qminimal.dll" "%_APP_DIR%\plugins\platforms\qminimal.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qoffscreen.dll" "%_APP_DIR%\plugins\platforms\qoffscreen.dll"
+        COPY /Y "%_QT_DIR%\plugins\platforms\qwebgl.dll" "%_APP_DIR%\plugins\platforms\qwebgl.dll"
+    )
+)
 IF %ERRORLEVEL% NEQ 0 ECHO Something wrong happened, deploying process aborted && GOTO Fin
 SET "_CONF_FILE=%_APP_DIR%\qt.conf"
 ECHO [Paths]>"%_CONF_FILE%"
+ECHO Prefix=.>>"%_CONF_FILE%"
 ECHO Binaries=.>>"%_CONF_FILE%"
 ECHO Libraries=.>>"%_CONF_FILE%"
 ECHO Plugins=plugins>>"%_CONF_FILE%"
