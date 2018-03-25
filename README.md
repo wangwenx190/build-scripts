@@ -3,14 +3,15 @@ A Windows batch script to help you compile Qt from source code. You must know th
 
 **Usage**
 1. Open cmd or power shell.
-2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6]
+2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6] [Option7]
    - Script file path: The relative/absolute path of the batch file
-   - Option1: Target architecture, x86 or x64, default is x64
-   - Option2: Target file type, dll or lib, default is dll
-   - Option3: Compile mode, debug, release or debug-and-release, default is release
-   - Option4: Qt source code dir, default is ".\src"
-   - Option5: Qt install dir, default is ".\qt"
-   - Option6: Extra parameters you want to pass to the config program, default is empty
+   - Option1: Compiler, win32-clang-g++, win32-clang-msvc, win32-g++, win32-icc, win32-icc-k1om or win32-msvc, default is win32-msvc
+   - Option2: Target architecture, x86 or x64, default is x64
+   - Option3: Target file type, dll or lib, default is dll
+   - Option4: Compile mode, debug, release or debug-and-release, default is release
+   - Option5: Qt source code dir, default is ".\src"
+   - Option6: Qt install dir, default is ".\qt"
+   - Option7: Extra parameters you want to pass to the config program, default is empty
 3. If all the prerequisites are installed correctly, the compiling process will start automatically and there is no more to do manually, the compiler will do all the rest things. The whole compiling process may take many hours, perhaps you should leave your computer and do some interesting things.
 4. If you want to link Qt against [ICU](http://site.icu-project.org/) and [OpenSSL](https://www.openssl.org/) libraries, you will have to change the script file. Please add the following config parameters:
    - ICU:
@@ -32,7 +33,7 @@ Notes:
 
 *Example*
 ```bat
-CALL "C:\Qt\build-qt.bat" x86 lib debug-and-release "C:\Qt\src" "C:\Qt\msvc2017_Static_64" -force-debug-info
+CALL "C:\Qt\build-qt.bat" win32-clang-g++ x86 lib debug-and-release "C:\Qt\src" "C:\Qt\msvc2017_Static_64" -force-debug-info
 ```
 
 **Tested on**
