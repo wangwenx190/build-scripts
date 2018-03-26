@@ -2,7 +2,7 @@
 COLOR
 TITLE Configuring Qt
 CLS
-SETLOCAL EnableDelayedExpansion
+SETLOCAL
 REM win32-clang-g++, win32-clang-msvc, win32-g++, win32-icc, win32-icc-k1om or win32-msvc, default is win32-msvc
 SET "_QT_COMPILER=%1"
 REM x86 or x64, default is x64
@@ -18,14 +18,12 @@ SET "_INSTALL_DIR=%6"
 REM Extra configure parameters, default is empty
 SET "_EXTRA_PARAMS=%7"
 IF /I "%_ROOT%" == "" SET "_ROOT=%~dp0src"
-IF NOT EXIST "%_ROOT%" ECHO Qt source code directory not found. Cannot continue compiling. && GOTO Fin
 IF /I "%_QT_COMPILER%" == "" SET "_QT_COMPILER=win32-msvc"
 IF /I "%_TARGET_ARCH%" == "" SET "_TARGET_ARCH=x64"
 IF /I "%_COMP_MODE%" == "" SET "_COMP_MODE=release"
 IF /I "%_BUILD_TYPE%" == "" SET "_BUILD_TYPE=dll"
 IF /I "%_INSTALL_DIR%" == "" SET "_INSTALL_DIR=%~dp0qt-%_BUILD_TYPE%-%_COMP_MODE%-%_TARGET_ARCH%"
 IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
-MD "%_INSTALL_DIR%"
 SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
@@ -35,16 +33,12 @@ IF /I "%_BUILD_TYPE%" == "lib" (
     REM And don't forget to change it back after compiling Qt
     SET "_BUILD_TYPE=-shared"
 )
-SET "_VC_CMD=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
-IF /I "%_QT_COMPILER%" == "win32-msvc" (
-    IF NOT EXIST "%_VC_CMD%" SET "_VC_CMD=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat"
-    IF NOT EXIST "%_VC_CMD%" SET "_VC_CMD=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
-    IF NOT EXIST "%_VC_CMD%" SET "_VC_CMD=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
-    IF NOT EXIST "%_VC_CMD%" SET "_VC_CMD=%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat"
-    IF NOT EXIST "%_VC_CMD%" ECHO Cannot find [vcvarsall.bat], if you didn't install vs in it's default location, please change this script. && GOTO Fin
-) ELSE (
-    SET "_EXTRA_PARAMS=-c++std c++1z %_EXTRA_PARAMS%"
-)
+SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat"
+IF /I "%_QT_COMPILER%" NEQ "win32-msvc" SET "_EXTRA_PARAMS=-c++std c++1z %_EXTRA_PARAMS%"
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -ltcg -plugin-manifests -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
@@ -65,7 +59,7 @@ ECHO Compiler: %_QT_COMPILER%
 ECHO Target architecture: %_TARGET_ARCH%
 ECHO Source code directory: %_ROOT%
 ECHO Install directory: %_INSTALL_DIR%
-IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO vcvarsall.bat: %_VC_CMD%
+IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO vcvarsall.bat: %_VC_BAT_PATH%
 ECHO Build tool: %_JOM%
 ECHO Qt configure parameters: %_CFG_PARAMS%
 ECHO ---------------------------------------
@@ -80,7 +74,7 @@ ECHO COLOR>>"%_BUILD_BAT%"
 ECHO TITLE Building Qt from source code>>"%_BUILD_BAT%"
 ECHO CLS>>"%_BUILD_BAT%"
 ECHO SETLOCAL>>"%_BUILD_BAT%"
-IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO CALL "%_VC_CMD%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
+IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
 ECHO SET "_ROOT=%_ROOT%">>"%_BUILD_BAT%"
 ECHO SET "PATH=%%_ROOT%%\qtbase\bin;%%_ROOT%%\gnuwin32\bin;%%PATH%%">>"%_BUILD_BAT%"
 ECHO SET _ROOT=>>"%_BUILD_BAT%"
