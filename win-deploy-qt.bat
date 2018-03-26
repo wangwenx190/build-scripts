@@ -29,14 +29,16 @@ IF EXIST "%_EXE_DIR_PATH%\translations" (
 )
 IF %ERRORLEVEL% NEQ 0 ECHO Something wrong happened, deploying process aborted && GOTO Fin
 SET "_CONF_FILE_PATH=%_EXE_DIR_PATH%\qt.conf"
-ECHO [Paths]>"%_CONF_FILE_PATH%"
-ECHO Prefix=.>>"%_CONF_FILE_PATH%"
-ECHO Binaries=.>>"%_CONF_FILE_PATH%"
-ECHO Libraries=.>>"%_CONF_FILE_PATH%"
-ECHO Plugins=plugins>>"%_CONF_FILE_PATH%"
-ECHO Imports=imports>>"%_CONF_FILE_PATH%"
-ECHO Qml2Imports=qml>>"%_CONF_FILE_PATH%"
-ECHO Translations=languages>>"%_CONF_FILE_PATH%"
+> "%_CONF_FILE_PATH%" (
+    @ECHO [Paths]
+    @ECHO Prefix=.
+    @ECHO Binaries=.
+    @ECHO Libraries=.
+    @ECHO Plugins=plugins
+    @ECHO Imports=imports
+    @ECHO Qml2Imports=qml
+    @ECHO Translations=languages
+)
 TITLE Finished
 CLS
 ECHO Deploying process have completed successfully
