@@ -85,7 +85,6 @@ ECHO Your build script will be saved to: %~dp0build.bat
 PAUSE
 SET "_BUILD_BAT=%~dp0build.bat"
 IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
-
 > "%_BUILD_BAT%" (
     @ECHO @ECHO OFF
     @ECHO COLOR
