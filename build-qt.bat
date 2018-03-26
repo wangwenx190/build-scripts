@@ -38,8 +38,18 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Vi
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat"
-IF /I "%_QT_COMPILER%" NEQ "win32-msvc" SET "_EXTRA_PARAMS=-c++std c++1z %_EXTRA_PARAMS%"
-SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -ltcg -plugin-manifests -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
+SET "_QT_PLATFORM=-platform %_QT_COMPILER%"
+IF /I "%_QT_COMPILER%" NEQ "win32-msvc" (
+    IF /I "%_QT_COMPILER%" NEQ "win32-icc" (
+        IF /I "%_QT_COMPILER%" NEQ "win32-icc-k1om" (
+            IF /I "%_QT_COMPILER%" NEQ "win32-clang-msvc" (
+                SET "_QT_PLATFORM=-xplatform %_QT_COMPILER% -device-option CROSS_COMPILE=x86_64-w64-mingw32-"
+                SET "_EXTRA_PARAMS=-c++std c++1z %_EXTRA_PARAMS%"
+            )
+        )
+    )
+)
+SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% %_QT_PLATFORM% -ltcg -plugin-manifests -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
@@ -60,6 +70,9 @@ ECHO Target architecture: %_TARGET_ARCH%
 ECHO Source code directory: %_ROOT%
 ECHO Install directory: %_INSTALL_DIR%
 IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO vcvarsall.bat: %_VC_BAT_PATH%
+IF /I "%_QT_COMPILER%" == "win32-icc" ECHO vcvarsall.bat: %_VC_BAT_PATH%
+IF /I "%_QT_COMPILER%" == "win32-icc-k1om" ECHO vcvarsall.bat: %_VC_BAT_PATH%
+IF /I "%_QT_COMPILER%" == "win32-clang-msvc" ECHO vcvarsall.bat: %_VC_BAT_PATH%
 ECHO Build tool: %_JOM%
 ECHO Qt configure parameters: %_CFG_PARAMS%
 ECHO ---------------------------------------
@@ -75,6 +88,9 @@ ECHO TITLE Building Qt from source code>>"%_BUILD_BAT%"
 ECHO CLS>>"%_BUILD_BAT%"
 ECHO SETLOCAL>>"%_BUILD_BAT%"
 IF /I "%_QT_COMPILER%" == "win32-msvc" ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
+IF /I "%_QT_COMPILER%" == "win32-icc" ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
+IF /I "%_QT_COMPILER%" == "win32-icc-k1om" ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
+IF /I "%_QT_COMPILER%" == "win32-clang-msvc" ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%>>"%_BUILD_BAT%"
 ECHO SET "_ROOT=%_ROOT%">>"%_BUILD_BAT%"
 ECHO SET "PATH=%%_ROOT%%\qtbase\bin;%%_ROOT%%\gnuwin32\bin;%%PATH%%">>"%_BUILD_BAT%"
 ECHO SET _ROOT=>>"%_BUILD_BAT%"
