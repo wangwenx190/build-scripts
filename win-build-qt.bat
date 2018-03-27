@@ -117,7 +117,8 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO %_JOM% install
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
-    @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
+    @ECHO COPY /Y "%_ROOT%\qtbase\bin\qt.conf" "%_INSTALL_DIR%\bin\qt.conf"
+    @ECHO ^>^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
     @ECHO     @ECHO Documentation=../../Docs/Qt-%_QT_VERSION%
     @ECHO     @ECHO Examples=../../Examples/Qt-%_QT_VERSION%
