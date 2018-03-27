@@ -81,9 +81,21 @@ ECHO Qt configure parameters: %_CFG_PARAMS%
 ECHO ---------------------------------------
 ECHO If everything is all right, press any key to generate the build script
 ECHO If anything is wrong, please close this window and re-run it
-ECHO Your build script will be saved to: %~dp0build.bat
+SET "yyyy=%date:~,4%"
+SET "mm=%date:~5,2%"
+SET "day=%date:~8,2%"
+SET "YYYYmmdd=%yyyy%%mm%%day%"
+SET "YYYYmmdd=%YYYYmmdd: =0%"
+SET "hh=%time:~0,2%"
+SET "mi=%time:~3,2%"
+SET "ss=%time:~6,2%"
+SET "hhmiss=%hh%%mi%%ss%"
+SET "hhmiss=%hhmiss: =0%"
+SET "hhmiss=%hhmiss::=0%"
+SET "hhmiss=%hhmiss: =0%"
+SET "_BUILD_BAT=%_INSTALL_DIR%_%YYYYmmdd%%hhmiss%.bat"
+ECHO Your build script will be saved to: %_BUILD_BAT%
 PAUSE
-SET "_BUILD_BAT=%~dp0build.bat"
 IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
 > "%_BUILD_BAT%" (
     @ECHO @ECHO OFF

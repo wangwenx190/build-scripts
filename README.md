@@ -1,4 +1,4 @@
-## build-qt.bat
+## win-build-qt.bat
 A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
 
 **Usage**
