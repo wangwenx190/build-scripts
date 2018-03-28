@@ -41,6 +41,7 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Vi
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 SET "_QT_PLATFORM=-platform %_QT_COMPILER%"
 IF /I "%_QT_COMPILER%" NEQ "win32-msvc" (
     IF /I "%_QT_COMPILER%" NEQ "win32-icc" (
@@ -48,9 +49,17 @@ IF /I "%_QT_COMPILER%" NEQ "win32-msvc" (
             IF /I "%_QT_COMPILER%" NEQ "win32-clang-msvc" (
                 SET "_QT_PLATFORM=-xplatform %_QT_COMPILER% -device-option CROSS_COMPILE=x86_64-w64-mingw32-"
                 SET "_EXTRA_PARAMS=-c++std c++1z %_EXTRA_PARAMS%"
+            ) ELSE (
+                IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
             )
+        ) ELSE (
+            IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
         )
+    ) ELSE (
+        IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
     )
+) ELSE (
+    IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
 )
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% %_QT_PLATFORM% -ltcg -plugin-manifests -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
@@ -117,11 +126,19 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO %_JOM% install
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
-    @ECHO COPY /Y "%_ROOT%\qtbase\bin\qt.conf" "%_INSTALL_DIR%\bin\qt.conf"
-    @ECHO ^>^> "%_INSTALL_DIR%\bin\qt.conf" ^(
+    @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
+    @ECHO     @ECHO Prefix=..
+    @ECHO     @ECHO HostPrefix=..
+    @ECHO     @ECHO Sysroot=
+    @ECHO     @ECHO SysrootifyPrefix=false
+    @ECHO     @ECHO TargetSpec=%_QT_COMPILER%
+    @ECHO     @ECHO HostSpec=%_QT_COMPILER%
     @ECHO     @ECHO Documentation=../../Docs/Qt-%_QT_VERSION%
     @ECHO     @ECHO Examples=../../Examples/Qt-%_QT_VERSION%
+    @ECHO     @ECHO [DevicePaths]
+    @ECHO     @ECHO Prefix=..
+    @ECHO     @ECHO [EffectivePaths]
     @ECHO     @ECHO Prefix=..
     @ECHO ^)
     @ECHO ^> "%_INSTALL_DIR%\bin\qtenv2.bat" ^(

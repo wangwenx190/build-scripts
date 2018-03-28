@@ -43,6 +43,7 @@ Windows 10 + MSVC 2017 + Qt 5.11.0
 
 (Theoretically, this batch script supports Qt 5.7.x and newer.)
 
+
 ## win-deploy-qt.bat
 A Windows batch script to help you deploy your Qt applications. This script is mainly designed for my personal use, but everyone can use it normally as well (if you don't have any special requirements).
 
@@ -65,3 +66,28 @@ CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\C
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
 (Theoretically, this batch script supports Qt 5.x and newer.)
+
+
+## win-build-openssl.bat
+A Windows batch script to help you build OpenSSL. You have to install Perl before run this script.
+
+**Usage**
+1. Open cmd or power shell.
+2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5]
+   - Script file path: The relative/absolute path of the batch file
+   - Option1: Target architecture, x86 or x64, default is x64
+   - Option2: Target file type, dll or lib, default is dll
+   - Option3: Compile mode, debug, release or debug-and-release, default is release
+   - Option4: OpenSSL source code dir, default is ".\src"
+   - Option5: OpenSSL install dir, default is ".\openssl"
+
+*Example*
+```bat
+CALL "C:\openssl\1.0.2\win-build-openssl.bat" x86 lib debug "C:\openssl\1.0.2\src" "C:\openssl\1.0.2\openssl"
+```
+
+**Tested on**
+
+Windows 10 + MSVC 2017 + OpenSSL 1.0.2
+
+(Theoretically, this batch script supports OpenSSL 1.0.2 and newer.)
