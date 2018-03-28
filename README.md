@@ -34,7 +34,7 @@ Notes:
 
 *Example*
 ```bat
-CALL "C:\Qt\Qt5.10.2\win-build-qt.bat" 5.10.2 win32-clang-g++ x86 lib debug-and-release "C:\Qt\Qt5.10.2\src" "C:\Qt\Qt5.10.2\5.10.2\clang_g++_Static_64" -force-debug-info
+CALL "C:\Qt\Qt5.10.2\win-build-qt.bat" 5.10.2 win32-clang-g++ x86 lib debug-and-release "C:\Qt\Qt5.10.2\src" "C:\Qt\Qt5.10.2\5.10.2\clang_g++_static_64" -force-debug-info
 ```
 
 **Tested on**

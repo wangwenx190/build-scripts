@@ -12,7 +12,7 @@ IF /I "%_TARGET_ARCH%" == "" SET "_TARGET_ARCH=x64"
 IF /I "%_BUILD_TYPE%" == "" SET "_BUILD_TYPE=dll"
 IF /I "%_COMP_MODE%" == "" SET "_COMP_MODE=release"
 IF /I "%_SRC_DIR%" == "" SET "_SRC_DIR=%~dp0src"
-IF /I "%_INSTALL_DIR%" == "" SET "_INSTALL_DIR=%~dp0openssl"
+IF /I "%_INSTALL_DIR%" == "" SET "_INSTALL_DIR=%~dp0openssl_%_BUILD_TYPE%_%_COMP_MODE%_%_TARGET_ARCH%"
 SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
@@ -21,18 +21,13 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Vi
 IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
 CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%
-IF /I "%_TARGET_ARCH%" == "x64" (
-    SET "_TARGET_ARCH=VC-WIN64A"
-) ELSE (
-    SET "_TARGET_ARCH=VC-WIN32"
-)
 IF /I "%_COMP_MODE%" NEQ "release" SET "_TARGET_ARCH=debug-%_TARGET_ARCH%"
 CD /D "%_SRC_DIR%"
 IF /I "%_TARGET_ARCH%" == "x64" (
-    perl Configure %_TARGET_ARCH% no-asm enable-static-engine --prefix="%_INSTALL_DIR%"
+    perl Configure VC-WIN64A no-asm enable-static-engine --prefix="%_INSTALL_DIR%"
     CALL "%_SRC_DIR%\ms\do_win64a.bat"
 ) ELSE (
-    perl Configure %_TARGET_ARCH% -DUNICODE -D_UNICODE no-asm enable-static-engine --prefix="%_INSTALL_DIR%"
+    perl Configure VC-WIN32 -DUNICODE -D_UNICODE no-asm enable-static-engine --prefix="%_INSTALL_DIR%"
     CALL "%_SRC_DIR%\ms\do_ms.bat"
 )
 IF /I "%_BUILD_TYPE%" == "dll" (
