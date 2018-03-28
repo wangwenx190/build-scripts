@@ -1,5 +1,5 @@
 ## win-build-qt.bat
-A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before you run it.
+A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before running it.
 
 **Usage**
 1. Open cmd or power shell.
@@ -69,7 +69,7 @@ Windows 10 + MSVC 2017 + Qt 5.11.0
 
 
 ## win-build-openssl.bat
-A Windows batch script to help you build OpenSSL. You have to install Perl before run this script.
+A Windows batch script to help you build OpenSSL. You have to install [Perl](https://www.activestate.com/activeperl) before running this script.
 
 **Usage**
 1. Open cmd or power shell.
