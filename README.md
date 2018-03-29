@@ -45,7 +45,7 @@ CALL "C:\Qt\Qt5.10.2\win-build-qt.bat" 5.10.2 win32-clang-g++ x86 lib debug-and-
 
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
-(Theoretically, this batch script supports Qt 5.7.x and newer)
+(Theoretically, this batch script only supports Qt 5.7.x and newer)
 
 
 ## win-deploy-qt.bat
@@ -69,7 +69,7 @@ CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\C
 
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
-(Theoretically, this batch script supports Qt 5.x and newer)
+(Theoretically, this batch script only supports Qt 5.x and newer)
 
 
 ## win-build-openssl.bat
@@ -77,21 +77,23 @@ A Windows batch script to help you build OpenSSL. You have to install [Perl](htt
 
 **Usage**
 1. Open cmd or power shell.
-2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5]
+2. CALL "Script file path" [Option1] [Option2] [Option3] [Option4] [Option5] [Option6] [Option7]
    - Script file path: The relative/absolute path of the batch file
-   - Option1: Target architecture, x86 or x64, default is x64
-   - Option2: Target file type, dll or lib, default is dll
-   - Option3: Compile mode, debug, release or debug-and-release, default is release
-   - Option4: OpenSSL source code dir, default is ".\src"
-   - Option5: OpenSSL install dir, default is ".\openssl"
+   - Option1: OpenSSL version, 1.0.2 or 1.1.0, default is 1.1.0
+   - Option2: Target architecture, x86 or x64, default is x64
+   - Option3: Target file type, dll or lib, default is dll
+   - Option4: Compile mode, debug, release or debug-and-release, default is release
+   - Option5: OpenSSL source code dir, default is ".\src"
+   - Option6: OpenSSL install dir, default is ".\openssl"
+   - Option7: Extra parameters you want to pass to the config program, default is empty
 
 *Example*
 ```bat
-CALL "C:\openssl\1.0.2\win-build-openssl.bat" x86 lib debug "C:\openssl\1.0.2\src" "C:\openssl\1.0.2\openssl"
+CALL "C:\openssl\1.0.2\win-build-openssl.bat" 1.0.2 x86 lib debug "C:\openssl\1.0.2\src" "C:\openssl\1.0.2\openssl"
 ```
 
 **Tested on**
 
-Windows 10 + MSVC 2017 + OpenSSL 1.0.2
+Windows 10 + MSVC 2017 + OpenSSL 1.0.2.x & 1.1.0.x
 
-(Theoretically, this batch script only supports OpenSSL 1.0.2.x)
+(Theoretically, this batch script only supports OpenSSL 1.0.2.x and 1.1.0.x)
