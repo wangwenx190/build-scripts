@@ -18,10 +18,14 @@ A Windows batch script to help you compile Qt from source code. You must know th
    - ICU:
      ```bat
      -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS_DEBUG="-licudtd -licuind -licuucd" ICU_LIBS_RELEASE="-licudt -licuin -licuuc"
+     REM If you do not have/need the debug version of ICU, use the following command line
+     REM -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-licudt -licuin -licuuc"
      ```
    - OpenSSL:
      ```bat
      -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS_DEBUG="-lssleay32d -llibeay32d" OPENSSL_LIBS_RELEASE="-lssleay32 -llibeay32"
+     REM If you do not have/need the debug version of OpenSSL, use the following command line
+     REM -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-lssleay32 -llibeay32"
      ```
    Notes:
    - "%_ICU_DIR%" and "%_OPENSSL_DIR%" are the directories that contain "bin", "lib" and "include" directories of ICU and OpenSSL, remember to set them in the batch script.
@@ -41,7 +45,7 @@ CALL "C:\Qt\Qt5.10.2\win-build-qt.bat" 5.10.2 win32-clang-g++ x86 lib debug-and-
 
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
-(Theoretically, this batch script supports Qt 5.7.x and newer.)
+(Theoretically, this batch script supports Qt 5.7.x and newer)
 
 
 ## win-deploy-qt.bat
@@ -65,7 +69,7 @@ CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\C
 
 Windows 10 + MSVC 2017 + Qt 5.11.0
 
-(Theoretically, this batch script supports Qt 5.x and newer.)
+(Theoretically, this batch script supports Qt 5.x and newer)
 
 
 ## win-build-openssl.bat
@@ -90,4 +94,4 @@ CALL "C:\openssl\1.0.2\win-build-openssl.bat" x86 lib debug "C:\openssl\1.0.2\sr
 
 Windows 10 + MSVC 2017 + OpenSSL 1.0.2
 
-(Theoretically, this batch script supports OpenSSL 1.0.2 and newer.)
+(Theoretically, this batch script only supports OpenSSL 1.0.2.x)
