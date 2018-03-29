@@ -30,6 +30,7 @@ A Windows batch script to help you compile Qt from source code. You must know th
    Notes:
    - "%_ICU_DIR%" and "%_OPENSSL_DIR%" are the directories that contain "bin", "lib" and "include" directories of ICU and OpenSSL, remember to set them in the batch script.
    - ICU will increase the size of your application for about 40MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
+   - Remember to add the ICU and OpenSSL's "bin" directories into your PATH variable, otherwise the whole Qt compiling process will fail.
 
 Notes:
 - **If you want to compile QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after compiling Qt.
