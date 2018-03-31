@@ -119,7 +119,11 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO SET "_ROOT=%_ROOT%"
     @ECHO SET "PATH=%%_ROOT%%\qtbase\bin;%%_ROOT%%\gnuwin32\bin;%%PATH%%"
     @ECHO SET _ROOT=
+    @ECHO SET QMAKESPEC=
+    @ECHO SET QTDIR=
     @ECHO CD /D "%_ROOT%"
+    @ECHO IF NOT EXIST qtbaseitignore TYPE nul>qtbaseitignore
+    @ECHO SET MAKE_COMMAND=
     @ECHO CALL "%_CFG_BAT%" %_CFG_PARAMS%
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO %_JOM%
