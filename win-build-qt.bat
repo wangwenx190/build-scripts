@@ -61,7 +61,7 @@ IF /I "%_QT_COMPILER%" NEQ "win32-msvc" (
 ) ELSE (
     IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
 )
-SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% %_QT_PLATFORM% -ltcg -plugin-manifests -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
+SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% %_QT_PLATFORM% -ltcg -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
