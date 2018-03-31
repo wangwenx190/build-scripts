@@ -52,4 +52,4 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    ```
    **Note**
 
-   mingw32-make -j n where "n" are the number of CPU cores your PC has.
+   mingw32-make -j n where "n" is the number of the CPU cores your PC has.

@@ -1,3 +1,6 @@
+## win-build-qt-mingw.md
+An instruction to help you compile Qt from source code on Windows through MSYS2 (MSYS2 uses MinGW/MinGW-w64 internally).
+
 ## win-build-qt.bat
 A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before running it.
 
