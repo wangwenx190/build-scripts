@@ -52,4 +52,5 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    ```
    **Note**
 
-   mingw32-make -j n where "n" is the number of the CPU cores your PC has.
+   1. mingw32-make -j n where "n" is the number of the CPU cores your PC has.
+   2. Remember to put "qt.conf" and "qtenv2.bat" into the "bin" directory. You can create a new file if you cannot find the original file in "src/qtbase/bin".
