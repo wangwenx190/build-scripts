@@ -33,7 +33,7 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    ```
    **Note**
 
-   "/c/Qt/Qt5.11.0/src" is the location of your Qt source code directory, "/" means "\\", "/c/" means "C:\\", "/d/" means "D:\\" and so on.
+   Remember to change "/c/Qt/Qt5.11.0/src" to the path of your Qt source code directory and you should change "\\" to "/", "C:\\" to "/c/", "D:\\" to "/d/" (etc) as well.
 2. Run below commands to configure Qt:
    ```text
    ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl dynamic -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
@@ -46,10 +46,10 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    4. According to Qt official wiki, **QWebEngine module cannot be compiled statically**, so you have skip it using "-skip qtwebengine" when you are building the static version of Qt.
    5. If you want Qt to load OpenGL dynamically, use "-opengl dynamic" (recommended, but need Microsoft DirectX SDK to build ANGLE), if you want Qt to use Desktop OpenGL only, use "-opengl desktop", if you want Qt to use ANGLE only, use "-opengl es2" (Windows only).
    6. --prefix=The target directory the compiled binaries should be copied to.
-3. If the configuration process above finished successfully, run below commands to build Qt and copy the binaries to the target directory:
+3. If the configuration process above finished successfully, run below commands to build Qt and copy the compiled binaries to the target directory:
    ```text
    mingw32-make -j n && mingw32-make install
    ```
    **Note**
 
-   mingw32-make -j n where "n" are the number of CPU cores you have.
+   mingw32-make -j n where "n" are the number of CPU cores your PC has.
