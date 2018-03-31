@@ -36,12 +36,12 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    Remember to change "/c/Qt/Qt5.11.0/src" to the path of your Qt source code directory and you should change "\\" to "/", "C:\\" to "/c/", "D:\\" to "/d/" (etc) as well.
 2. Run below commands to configure Qt:
    ```text
-   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl dynamic -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
+   ./configure -opensource -confirm-license -release -static -skip qtwebengine -platform win32-g++ -opengl dynamic -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
    ```
    **Note**
 
    1. If you want to build the debug version of Qt, use "-debug" instead of "-release" or if you want to build both debug and release versions of Qt, use "-debug-and-release" instead of "-release".
-   2. If you want to build the shared version of Qt, use "-shared" instead of "-static -static-runtime".
+   2. If you want to build the shared version of Qt, use "-shared" instead of "-static".
    3. **If you want to build QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after building Qt.
    4. According to Qt official wiki, **QWebEngine module cannot be compiled statically**, so you have skip it using "-skip qtwebengine" when you are building the static version of Qt.
    5. If you want Qt to load OpenGL dynamically, use "-opengl dynamic" (recommended, but need Microsoft DirectX SDK to build ANGLE), if you want Qt to use Desktop OpenGL only, use "-opengl desktop", if you want Qt to use ANGLE only, use "-opengl es2" (Windows only).
