@@ -15,28 +15,27 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
 5. Exit out of MSYS2-shell, restart MSYS2-shell, then you are ready to use MSYS2-shell.
 
 ### Step 2: Install required components
-1. If you want to use ANGLE, download Microsoft DirectX SDK June 2010 from it's [official website](http://www.microsoft.com/en-us/download/details.aspx?id=6812) (http://www.microsoft.com/en-us/download/details.aspx?id=6812) and install it.
-2. Start MSYS2-shell. Run/execute below commands to load MinGW-w64 SEH (64bit/x86_64) posix and Dwarf-2 (32bit/i686) posix toolchains & related other tools, dependencies & components from MSYS2 REPO:
-   ```text
-   pacman -S base-devel git mercurial cvs wget p7zip
-   pacman -S perl ruby python2 mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain
-   ```
-   **Note**
+Start MSYS2-shell. Run/execute below commands to load MinGW-w64 SEH (64bit/x86_64) posix and Dwarf-2 (32bit/i686) posix toolchains & related other tools, dependencies & components from MSYS2 REPO:
+```text
+pacman -S base-devel git mercurial cvs wget p7zip
+pacman -S perl ruby python2 mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain
+```
+**Note**
 
-   The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw32\bin") directory location, and, x86_64 (64bit) toolchain loads into "/c/msys64/mingw64/bin" ("C:\msys64\mingw64\bin") directory. Perl, Ruby, Python, OpenSSL etc loads into "/c/msys64/usr/bin" ("C:\msys64\usr\bin") directory.
+The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw32\bin") directory location, and, x86_64 (64bit) toolchain loads into "/c/msys64/mingw64/bin" ("C:\msys64\mingw64\bin") directory. Perl, Ruby, Python, OpenSSL etc loads into "/c/msys64/usr/bin" ("C:\msys64\usr\bin") directory.
 
 ### Step 3: Build Qt
 1. Start MSYS2 shell command prompt and run below commands:
    ```text
    cd /c/Qt/Qt5.11.0/src
-   windows2unix() { local pathPcs=() split pathTmp IFS=\;; read -ra split <<< "$*"; for pathTmp in "${split[@],}"; do pathPcs+=( "/${pathTmp//+([:\\])//}" ); done; echo "${pathPcs[*]}"; }; systemrootP=$(windows2unix "$SYSTEMROOT"); export PATH="/c/Program Files (x86)/Microsoft DirectX SDK (June 2010):$PWD/qtbase/bin:$PWD/gnuwin32/bin:/c/msys64/mingw64/bin:/c/msys64/usr/bin:$PATH"
+   windows2unix() { local pathPcs=() split pathTmp IFS=\;; read -ra split <<< "$*"; for pathTmp in "${split[@],}"; do pathPcs+=( "/${pathTmp//+([:\\])//}" ); done; echo "${pathPcs[*]}"; }; systemrootP=$(windows2unix "$SYSTEMROOT"); export PATH="$PWD/qtbase/bin:$PWD/gnuwin32/bin:/c/msys64/mingw64/bin:/c/msys64/usr/bin:$PATH"
    ```
    **Note**
 
    Remember to change "/c/Qt/Qt5.11.0/src" to the path of your Qt source code directory and you should change "\\" to "/", "C:\\" to "/c/", "D:\\" to "/d/" (etc) as well.
 2. Run below commands to configure Qt:
    ```text
-   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl dynamic -no-angle -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
+   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl desktop -qt-zlib -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
    ```
    **Note**
 
@@ -44,8 +43,7 @@ Using MSYS2 is much more easier, so I will only write about how to build Qt thro
    2. If you want to build the shared version of Qt, use "-shared" instead of "-static -static-runtime".
    3. **If you want to build QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after building Qt.
    4. According to Qt official wiki, **QWebEngine module cannot be compiled statically**, so you have skip it using "-skip qtwebengine" when you are building the static version of Qt.
-   5. If you want Qt to load OpenGL dynamically, use "-opengl dynamic" (recommended, but need Microsoft DirectX SDK to build ANGLE), if you want Qt to use Desktop OpenGL only, use "-opengl desktop", if you want Qt to use ANGLE only, use "-opengl es2" (Windows only).
-   6. --prefix=The target directory the compiled binaries should be copied to.
+   5. --prefix=The target directory the compiled binaries should be copied to.
 3. If the configuration process above finished successfully, run below commands to build Qt and copy the compiled binaries to the target directory:
    ```text
    mingw32-make -j n && mingw32-make install
