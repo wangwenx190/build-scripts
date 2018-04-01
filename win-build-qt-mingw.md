@@ -1,5 +1,5 @@
 ﻿## Build Qt with MSYS2
-Using MSYS2 is much more easier, so I will only write about how to build Qt through MSYS2. If you want to build Qt through MSYS or MinGW(-w64), do it yourself.
+The steps of using MinGW and MinGW-w64 is similar so I will only write about how to use MSYS2.
 
 ### Step 1: Prepare MSYS2
 1. Download MSYS2 from it's [official website](http://www.msys2.org/) (http://www.msys2.org/) and install it.
@@ -35,7 +35,7 @@ The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw3
    Remember to change "/c/Qt/Qt5.11.0/src" to the path of your Qt source code directory and you should change "\\" to "/", "C:\\" to "/c/", "D:\\" to "/d/" (etc) as well.
 2. Run below commands to configure Qt:
    ```text
-   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl desktop -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
+   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl desktop -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++1z -silent -ltcg
    ```
    **Note**
 
@@ -46,9 +46,9 @@ The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw3
    5. --prefix=The target directory the compiled binaries should be copied to.
 3. If the configuration process above finished successfully, run below commands to build Qt and copy the compiled binaries to the target directory:
    ```text
-   mingw32-make -j n && mingw32-make install
+   make -j n && make install
    ```
    **Note**
 
-   1. mingw32-make -j n where "n" is the number of the CPU cores your PC has.
+   1. "make -j n" where "n" is the number of the CPU cores your PC has.
    2. Remember to put "qt.conf" and "qtenv2.bat" into the "bin" directory. You can create a new file if you cannot find the original file in "src/qtbase/bin".
