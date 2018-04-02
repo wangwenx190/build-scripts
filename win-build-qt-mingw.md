@@ -35,7 +35,7 @@ The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw3
    Remember to change "/c/Qt/Qt5.11.0/src" to the path of your Qt source code directory and you should change "\\" to "/", "C:\\" to "/c/", "D:\\" to "/d/" (etc) as well.
 2. Run below commands to configure Qt:
    ```text
-   ./configure -opensource -confirm-license -release -static -skip qtwebengine -platform win32-g++ -opengl dynamic -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist -c++std c++11 -silent
+   ./configure -opensource -confirm-license -release -static -skip qtwebengine -platform win32-g++ -opengl dynamic -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist
    ```
    **Note**
 
