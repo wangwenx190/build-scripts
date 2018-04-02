@@ -42,12 +42,12 @@ For MSYS and MinGW/MinGW-w64, just download the latest packages and extract them
    - For MSYS and MinGW/MinGW-w64, the commands are the same with MSYS2 and remember to add perl, python and ruby's paths to the PATH variable.
 2. Run below commands to configure Qt:
    ```text
-   ./configure -opensource -confirm-license -release -static -static-runtime -skip qtwebengine -platform win32-g++ -opengl dynamic -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist -silent
+   ./configure -opensource -confirm-license -release -static -skip qtwebengine -platform win32-g++ -opengl dynamic -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -nomake examples -nomake tests -prefix $PWD/../dist -silent
    ```
    **Notes**
 
    - If you want to build the debug version of Qt, use "-debug" instead of "-release" or if you want to build both debug and release versions of Qt, use "-debug-and-release" instead of "-release".
-   - If you want to build the shared version of Qt, use "-shared" instead of "-static -static-runtime".
+   - If you want to build the shared version of Qt, use "-shared" instead of "-static".
    - If you want Qt to load OpenGL dynamically, use "-opengl dynamic" (highly recommended, but need Microsoft DirectX SDK June 2010 to build ANGLE), if you want Qt to use ANGLE only, use "-opengl es2" (Windows only, also need Microsoft DirectX SDK June 2010), if you want Qt to use Desktop OpenGL only, use "-opengl desktop" (no need of ANGLE, so no need of Microsoft DirectX SDK June 2010 as well).
    - **If you want to build QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after building Qt.
    - According to Qt official wiki, **QWebEngine module cannot be compiled statically**, so you have skip it using "-skip qtwebengine" when you are building the static version of Qt.
