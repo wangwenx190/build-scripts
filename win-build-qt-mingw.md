@@ -29,6 +29,7 @@ For MSYS and MinGW/MinGW-w64, just download the latest packages and extract them
 
    - The i686 (32bit) toolchain loads into "/c/msys64/mingw32/bin" ("C:\msys64\mingw32\bin") directory location, and, x86_64 (64bit) toolchain loads into "/c/msys64/mingw64/bin" ("C:\msys64\mingw64\bin") directory. Perl, Ruby, Python, OpenSSL etc loads into "/c/msys64/usr/bin" ("C:\msys64\usr\bin") directory.
    - For MSYS and MinGW/MinGW-w64, you will have to download and install these softwares above from their official websites.
+   - **ATTENTION: You need to download and install the latest version of Python 2, not Python 3, because according to Qt official wiki, Python 3 is not supported.**
 
 ### Step 3: Build Qt
 1. Start MSYS2 shell command prompt and run below commands:
