@@ -30,7 +30,12 @@ IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
 SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
-    SET "_BUILD_TYPE=-static -static-runtime -skip qtwebengine"
+    SET "_BUILD_TYPE=-static -skip qtwebengine"
+    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in failure
+    SET "_SRT=False"
+    IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_SRT=True"
+    IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_SRT=True"
+    IF /I "%_SRT%" == "True" SET "_BUILD_TYPE=%_BUILD_TYPE% -static-runtime"
 ) ELSE (
     REM If you want to compile QWebEngine, you have to change your system locale to English(United States)
     REM And don't forget to change it back after compiling Qt
@@ -45,7 +50,8 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
-IF /I "%_QT_COMPILER%" == "win32-msvc" SET "_EXTRA_PARAMS=-ltcg %_EXTRA_PARAMS%"
+REM It seems that MinGW/MinGW-w64 and ICC don't support "-ltcg" parameter
+IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_EXTRA_PARAMS=-ltcg %_EXTRA_PARAMS%"
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
@@ -56,7 +62,9 @@ REM Remember to add it's path to your system path variables
 REM or just put it into "src\gnuwin32\bin", this directory will be added to
 REM the PATH variable temporarily during the compiling process.
 SET "_JOM=nmake"
+REM You can change "nmake" to "jom" manually after the script was generated
 IF EXIST "jom.exe" SET "_JOM=jom"
+IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_JOM=mingw32-make"
 TITLE Configure finished
 CLS
 ECHO The configuring process have finished successfully
@@ -89,8 +97,10 @@ ECHO Your build script will be saved to: %_BUILD_BAT%
 PAUSE
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" (
     IF /I "%_TARGET_ARCH%" == "x64" (
+        REM If you are using VS2015, please change "vs2017" to "vs2015"
         SET "_TARGET_ARCH=intel64 vs2017"
     ) ELSE (
+        REM If you are using VS2015, please change "vs2017" to "vs2015"
         SET "_TARGET_ARCH=ia32 vs2017"
     )
 )
