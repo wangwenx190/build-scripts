@@ -53,6 +53,7 @@ For MSYS and MinGW/MinGW-w64, just download the latest packages and extract them
    - **If you want to build QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after building Qt.
    - According to Qt official wiki, **QWebEngine module cannot be compiled statically**, so you have skip it using "-skip qtwebengine" when you are building the static version of Qt.
    - --prefix=The target directory the compiled binaries should be copied to.
+   - **IMPORTANT**: "-static-runtime" and "-ltcg" will result in compilation failure, currently I don't know why.
 3. If the configuration process above finished successfully, run below commands to build Qt and copy the compiled binaries to the target directory:
    ```text
    make -j n && make install

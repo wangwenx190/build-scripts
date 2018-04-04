@@ -1,4 +1,4 @@
-## win-build-qt-mingw.md
+## win-build-qt-msys2.md
 An instruction to help you compile Qt from source code on Windows through MSYS2.
 
 ## win-build-qt.bat

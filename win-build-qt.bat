@@ -31,7 +31,7 @@ SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
     SET "_BUILD_TYPE=-static -skip qtwebengine"
-    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in failure
+    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
     SET "_SRT=False"
     IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_SRT=True"
     IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_SRT=True"
@@ -50,7 +50,7 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
-REM It seems that MinGW/MinGW-w64 don't support "-ltcg" parameter
+REM If you are using MinGW/MinGW-w64, adding "-ltcg" will result in compilation failure, I don't know why
 SET "_LTCG_ENABLED=False"
 IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_LTCG_ENABLED=True"
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_LTCG_ENABLED=True"
