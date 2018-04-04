@@ -50,8 +50,11 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
-REM It seems that MinGW/MinGW-w64 and ICC don't support "-ltcg" parameter
-IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_EXTRA_PARAMS=-ltcg %_EXTRA_PARAMS%"
+REM It seems that MinGW/MinGW-w64 don't support "-ltcg" parameter
+SET "_LTCG_ENABLED=False"
+IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_LTCG_ENABLED=True"
+IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_LTCG_ENABLED=True"
+IF /I "%_LTCG_ENABLED%" == "True" SET "_EXTRA_PARAMS=-ltcg %_EXTRA_PARAMS%"
 SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
