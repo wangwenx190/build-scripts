@@ -31,11 +31,6 @@ SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
     SET "_BUILD_TYPE=-static -skip qtwebengine"
-    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
-    SET "_SRT=False"
-    IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_SRT=True"
-    IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_SRT=True"
-    IF /I "%_SRT%" == "True" SET "_BUILD_TYPE=%_BUILD_TYPE% -static-runtime"
 ) ELSE (
     REM If you want to compile QWebEngine, you have to change your system locale to English(United States)
     REM And don't forget to change it back after compiling Qt
@@ -55,7 +50,11 @@ SET "_LTCG_ENABLED=False"
 IF /I "%_QT_COMPILER:~-4%" == "msvc" SET "_LTCG_ENABLED=True"
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_LTCG_ENABLED=True"
 IF /I "%_LTCG_ENABLED%" == "True" SET "_EXTRA_PARAMS=-ltcg %_EXTRA_PARAMS%"
-SET _CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix "%_INSTALL_DIR%" %_EXTRA_PARAMS%
+IF /I "%_BUILD_TYPE:~0,7%" == "-static" (
+    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
+    IF /I "%_LTCG_ENABLED%" == "True" SET "_BUILD_TYPE=-static-runtime %_BUILD_TYPE%"
+)
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix %_INSTALL_DIR% %_EXTRA_PARAMS%"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
@@ -79,7 +78,7 @@ ECHO Source code directory: %_ROOT%
 ECHO Install directory: %_INSTALL_DIR%
 IF /I "%_QT_COMPILER:~-3%" NEQ "g++" ECHO Compiler batch script: %_VC_BAT_PATH%
 ECHO Build tool: %_JOM%
-ECHO Qt configure parameters: %_CFG_PARAMS%
+ECHO Qt configuration parameters: %_CFG_PARAMS%
 ECHO ---------------------------------------
 ECHO If everything is all right, press any key to generate the build script
 ECHO If anything is wrong, please close this window and re-run it
@@ -121,9 +120,11 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO CD /D "%_ROOT%"
     @ECHO CALL "%_CFG_BAT%" %_CFG_PARAMS%
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
-    @ECHO %_JOM%
-    @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
-    @ECHO %_JOM% install
+    IF /I "%_QT_COMPILER:~-3%" == "g++" (
+        @ECHO %_JOM% -j 4 ^&^& %_JOM% install
+    ) ELSE (
+        @ECHO %_JOM% ^&^& %_JOM% install
+    )
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
