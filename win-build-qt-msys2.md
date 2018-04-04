@@ -16,10 +16,10 @@ The steps of using MSYS and MinGW/MinGW-w64 are quite similar to MSYS2 so I will
 
 **Note**
 
-For MSYS and MinGW/MinGW-w64, just download the latest packages and extract them to anywhere you like.
+For MSYS and MinGW/MinGW-w64, just download the latest packages and extract them to anywhere you like. If an installation is needed, you will have to install it, of course. And remember to add their binaries' paths to your system PATH variable.
 
 ### Step 2: Install required components
-1. If you want to use ANGLE or if you want Qt to load OpenGL dynamically, download Microsoft DirectX SDK June 2010 from it's [official website](http://www.microsoft.com/en-us/download/details.aspx?id=6812) (http://www.microsoft.com/en-us/download/details.aspx?id=6812) and install it. You have to install the old SDK above, the newest SDK inside the Windows 10 SDK is not supported.
+1. If you want to use ANGLE or if you want Qt to load OpenGL dynamically, download Microsoft DirectX SDK June 2010 from it's [official website](http://www.microsoft.com/en-us/download/details.aspx?id=6812) (http://www.microsoft.com/en-us/download/details.aspx?id=6812) and install it. You have to install the this SDK, the newest SDK inside the Windows 10 SDK is not supported.
 2. Start MSYS2-shell. Run/execute below commands to load MinGW-w64 SEH (64bit/x86_64) posix and Dwarf-2 (32bit/i686) posix toolchains & related other tools, dependencies & components from MSYS2 REPO:
    ```text
    pacman -S base-devel git mercurial cvs wget p7zip
