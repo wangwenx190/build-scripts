@@ -54,7 +54,7 @@ IF /I "%_BUILD_TYPE:~0,7%" == "-static" (
     REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
     IF /I "%_LTCG_ENABLED%" == "True" SET "_BUILD_TYPE=-static-runtime %_BUILD_TYPE%"
 )
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix %_INSTALL_DIR% %_EXTRA_PARAMS%"
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -skip qtdoc -skip qttools -skip qttranslations -nomake examples -nomake tests -opengl dynamic -prefix %_INSTALL_DIR% %_EXTRA_PARAMS%"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
