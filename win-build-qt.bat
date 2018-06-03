@@ -143,12 +143,14 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO CD /D "%%~dp0"
     @ECHO RD /S /Q "%_ROOT%"
     @ECHO TITLE Compiling process finished
+    @ECHO CLS
     @ECHO ECHO Compiling process have finished successfully
     @ECHO ECHO All binaries have been installed to: %_INSTALL_DIR%
     REM @ECHO ECHO Press any key to exit this program
     @ECHO GOTO Fin
     @ECHO :ErrHappen
     @ECHO TITLE Compiling process aborted
+    @ECHO ============================================================
     @ECHO ECHO Something wrong happened during the compiling process
     @ECHO ECHO and the process have aborted because of this
     @ECHO ECHO Please check the log file for more information
