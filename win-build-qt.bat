@@ -140,10 +140,12 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO     @ECHO cd /D ^%%%%~dp0..
     @ECHO     @ECHO echo Remember to call vcvarsall.bat to complete environment setup!
     @ECHO ^)
+    @ECHO CD /D ^%%%%~dp0
+    @ECHO RD /S /Q "%_ROOT%"
     @ECHO TITLE Compiling process finished
     @ECHO ECHO Compiling process have finished successfully
     @ECHO ECHO All binaries have been installed to: %_INSTALL_DIR%
-    @ECHO ECHO Press any key to exit this program
+    REM @ECHO ECHO Press any key to exit this program
     @ECHO GOTO Fin
     @ECHO :ErrHappen
     @ECHO TITLE Compiling process aborted
@@ -154,8 +156,12 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO GOTO Fin
     @ECHO :Fin
     @ECHO ENDLOCAL
+    @ECHO IF %%ERRORLEVEL%% NEQ 0 ^(
     @ECHO PAUSE
     @ECHO EXIT /B
+    @ECHO ^) ELSE ^(
+    @ECHO DEL /F %%0
+    @ECHO ^)
 )
 CLS
 ECHO Build script have been saved to: %_BUILD_BAT%
