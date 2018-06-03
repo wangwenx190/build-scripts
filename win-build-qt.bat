@@ -30,7 +30,8 @@ IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
 SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
-    SET "_BUILD_TYPE=-static -skip qtwebengine"
+    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
+    SET "_BUILD_TYPE=-static -static-runtime -skip qtwebengine"
 ) ELSE (
     REM If you want to compile QWebEngine, you have to change your system locale to English(United States)
     REM And don't forget to change it back after compiling Qt
