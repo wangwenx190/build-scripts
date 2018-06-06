@@ -150,7 +150,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO GOTO Fin
     @ECHO :ErrHappen
     @ECHO TITLE Compiling process aborted
-    @ECHO ============================================================
+    @ECHO ECHO ============================================================
     @ECHO ECHO Something wrong happened during the compiling process
     @ECHO ECHO and the process have aborted because of this
     @ECHO ECHO Please check the log file for more information
