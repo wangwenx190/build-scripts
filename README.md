@@ -1,3 +1,6 @@
+## build-static-version-of-qt-with-icu-and-openssl-linked.md
+An instruction to help you compile static version of Qt with static ICU and static OpenSSL linked.
+
 ## win-build-qt-msys2.md
 An instruction to help you compile Qt from source code on Windows through MSYS2.
 
