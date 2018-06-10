@@ -1,13 +1,13 @@
-﻿# How to build static version of Qt with ICU and OpenSSL
+﻿# How to build static version of Qt with ICU and OpenSSL linked
 
-**For Windows and VS developers ONLY !!!**
+**For Windows platform and VS developers ONLY !!!**
 
 **You have to install [Active Perl](https://www.activestate.com/activeperl/downloads), [Python 2](https://www.python.org/downloads/windows/) and [Visual Studio](https://www.visualstudio.com/downloads/) first.**
 
 ## Build static version of ICU
 
 32-bit example:
-1. [Download the newest MSYS2](http://www.msys2.org/) and install it. I assume you have installed it to it's default location "C:\msys64".
+1. [Download the latest MSYS2](http://www.msys2.org/) and install it. I assume you have installed it to it's default location "C:\msys64".
 2. Open *MSYS2 MSYS* and execute the following commands:
    ```bash
    pacman -Syu
