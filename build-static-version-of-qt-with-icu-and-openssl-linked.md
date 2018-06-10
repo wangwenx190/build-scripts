@@ -26,11 +26,11 @@
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
    set MSYS2_PATH_TYPE=inherit
-   call C:\msys64\msys2_shell.cmd -mingw32
+   call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
    ```
    Then execute the following commands:
    ```bash
-   cd /c/icu/source
+   cd /C/ICU/source
    ./runConfigureICU --enable-static --disable-shared --prefix=$PWD/../icu4c-static CFLAGS=-MT CXXFLAGS=-MT
    make -j4 && make install
    ```
@@ -49,4 +49,4 @@
    SET "PATH=%_ICU_DIR%\bin;%_OPENSSL_DIR%\bin;%PATH%"
    CALL "configure.bat" -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-lsicudt -lsicuin -lsicuio -lsicutest -lsicutu -lsicuuc -lAdvapi32" -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32"
    ```
-3. You may have some compiler errors and the whole compilation may stop while compiling Qt, it's OK, just close the batch script and rerun it.
+3. If you have compiler errors and the whole compiling process stopped, don't worry, it's OK, just close the batch script window and rerun it.
