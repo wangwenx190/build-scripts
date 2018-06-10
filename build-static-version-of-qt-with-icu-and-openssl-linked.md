@@ -42,7 +42,7 @@
 ## Build static version of Qt
 
 1. [Use the script I offered to generate the batch script file.](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat)
-2. Open the generated *.bat* file, change or add the following lines:
+2. Open the generated *.bat* file, add the following lines to it and put them to their proper position (you may have to change a little bit if necessary):
    ```bat
    SET "_ICU_DIR=C:\ICU\icu4c-static"
    SET "_OPENSSL_DIR=C:\OpenSSL\openssl-static"
