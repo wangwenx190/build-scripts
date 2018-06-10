@@ -8,25 +8,25 @@
 
 32-bit example:
 1. [Download the latest MSYS2](http://www.msys2.org/) and install it. I assume you have installed it to it's default location "C:\msys64".
-2. Open *MSYS2 MSYS* and execute the following commands:
+2. Open *MSYS2 MSYS* shell and execute the following commands:
    ```bash
    pacman -Syu
    ```
-   Close the bash window forcely and open *MSYS2 MSYS* again, execute the following commands:
+   Close the shell window forcely and open *MSYS2 MSYS* shell again, execute the following commands:
    ```bash
    pacman -Su
    ```
-3. Open *MSYS2 MinGW 32-bit* and execute the following commands:
+3. Open *MSYS2 MinGW 32-bit* shell and execute the following commands:
    ```bash
    pacman -S $MINGW_PACKAGE_PREFIX-make
    ```
 4. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file), "C:\msys64\mingw32\bin\mingw32-make.exe" to "make.exe".
 5. [Download the latest ICU source code package](http://site.icu-project.org/) and extract it to anywhere you like. I assume you have extract it to "C:\ICU".
-6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion):
+6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
    set MSYS2_PATH_TYPE=inherit
-   C:\msys64\msys2_shell.cmd -mingw32
+   call C:\msys64\msys2_shell.cmd -mingw32
    ```
    Then execute the following commands:
    ```bash
@@ -49,4 +49,4 @@
    SET "PATH=%_ICU_DIR%\bin;%_OPENSSL_DIR%\bin;%PATH%"
    CALL "configure.bat" -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-lsicudt -lsicuin -lsicuio -lsicutest -lsicutu -lsicuuc -lAdvapi32" -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32"
    ```
-3. You may have some compiler errors while compiling Qt, it's OK, just rerun the batch script.
+3. You may have some compiler errors and the whole compilation may stop while compiling Qt, it's OK, just close the batch script and rerun it.
