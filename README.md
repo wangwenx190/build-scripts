@@ -47,9 +47,9 @@ CALL "C:\Qt\Qt5.10.2\win-build-qt.bat" 5.10.2 win32-clang-g++ x86 lib debug-and-
 
 **Tested on**
 
-Windows 10 + MSVC 2017 + Qt 5.11.0
+Windows 10 + MSVC 2017 + Qt 5.11.0/5.6.3
 
-(Theoretically, this batch script only supports Qt 5.7.x and newer)
+(Theoretically, this batch script only supports Qt 5.x and newer, it does NOT support Qt4 or any older versions)
 
 
 ## win-deploy-qt.bat

@@ -34,7 +34,8 @@ IF /I "%_COMP_MODE%" NEQ "release" (
         SET "_PLATFORM=%_PLATFORM% --debug"
     )
 )
-SET _CFG_PARAMS=Configure %_PLATFORM% no-asm enable-static-engine --prefix="%_INSTALL_DIR%" %_EXTRA_PARAMS%
+SET _CFG_PARAMS=Configure %_PLATFORM% no-asm --prefix="%_INSTALL_DIR%" %_EXTRA_PARAMS%
+IF /I "%_BUILD_TYPE%" NEQ "lib" SET _CFG_PARAMS=%_CFG_PARAMS% enable-static-engine
 IF /I "%_TARGET_ARCH%" NEQ "x64" SET _CFG_PARAMS=%_CFG_PARAMS% -DUNICODE -D_UNICODE
 IF /I "%_OPENSSL_VERSION%" NEQ "1.0.2" (
     IF /I "%_BUILD_TYPE%" NEQ "dll" SET _CFG_PARAMS=%_CFG_PARAMS% no-shared -static

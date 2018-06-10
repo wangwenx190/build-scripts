@@ -26,6 +26,10 @@ IF /I "%_TARGET_ARCH%" == "" SET "_TARGET_ARCH=x64"
 IF /I "%_COMP_MODE%" == "" SET "_COMP_MODE=release"
 IF /I "%_BUILD_TYPE%" == "" SET "_BUILD_TYPE=dll"
 IF /I "%_INSTALL_DIR%" == "" SET "_INSTALL_DIR=%~dp0Qt_%_QT_VERSION%_%_QT_COMPILER%_%_TARGET_ARCH%_%_BUILD_TYPE%_%_COMP_MODE%"
+IF /I "%_QT_VERSION:~0,1%" == "1" ECHO This script does NOT support Qt1! && GOTO Fin
+IF /I "%_QT_VERSION:~0,1%" == "2" ECHO This script does NOT support Qt2! && GOTO Fin
+IF /I "%_QT_VERSION:~0,1%" == "3" ECHO This script does NOT support Qt3! && GOTO Fin
+IF /I "%_QT_VERSION:~0,1%" == "4" ECHO This script does NOT support Qt4! && GOTO Fin
 IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
 SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
@@ -46,7 +50,14 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -qt-sqlite -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -silent -nomake examples -nomake tests -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -silent -nomake examples -nomake tests -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+IF /I "%_QT_VERSION:~0,3%" == "5.0" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.1" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.2" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.3" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.4" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.5" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+IF /I "%_QT_VERSION:~0,3%" == "5.6" SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
