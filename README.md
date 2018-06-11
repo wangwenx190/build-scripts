@@ -1,5 +1,5 @@
 ## optional-optimization-parameters-for-msvc-compiler.md
-Some optional optimization parameters for MSVC compiler, **NOT** compatible with Intel C++ Compiler (ICC).
+Some optional optimization parameters for MSVC compiler.
 
 ## build-static-version-of-qt-with-icu-and-openssl-linked.md
 An instruction to help you compile static version of Qt with static ICU and static OpenSSL linked.

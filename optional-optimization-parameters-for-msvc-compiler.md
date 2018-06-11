@@ -1,8 +1,9 @@
 ﻿# Optional optimization parameters for MSVC compiler
 
-### IMPORTANT note
+### Notes
 
-Only for MSVC compiler, **NOT** compatible with Intel C++ Compiler (ICC)
+1. Intel C++ Compiler (ICC) uses MSVC compiler as it's backend on Windows platform, so you can also use these parameters in ICC.
+2. If you are using ICC, you can use the highest optimization level: **O3**.
 
 ### Configuration file
 
@@ -15,19 +16,19 @@ C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf
 
 ### Optimization parameters
 
-Add "**-Ob2 -Oi -Ot -Oy- -GT**" to "**QMAKE_CFLAGS_OPTIMIZE**"
+Add "**-Ob2 -Oi -Ot -GT**" to "**QMAKE_CFLAGS_OPTIMIZE**"
 
 For example:
 ```text
-QMAKE_CFLAGS_OPTIMIZE = -O2 -Ob2 -Oi -Ot -Oy- -GT
+QMAKE_CFLAGS_OPTIMIZE = -O2 -Ob2 -Oi -Ot -GT
 ```
 
 If there is no "QMAKE_CFLAGS_OPTIMIZE" in "msvc-desktop.conf", you can add these parameters to "**QMAKE_CFLAGS_RELEASE**" and "**QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO**"
 
 For example:
 ```text
-QMAKE_CFLAGS_RELEASE = -O2 -Ob2 -Oi -Ot -Oy- -GT -MD
-QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO = -O2 -Ob2 -Oi -Ot -Oy- -GT -Zi -MD
+QMAKE_CFLAGS_RELEASE = -O2 -Ob2 -Oi -Ot -GT -MD
+QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO = -O2 -Ob2 -Oi -Ot -GT -Zi -MD
 ```
 
 And enable **Link Time Code Generation (LTCG)**: pass "**-ltcg**" to "**configure.bat**" while you are configuring Qt.
