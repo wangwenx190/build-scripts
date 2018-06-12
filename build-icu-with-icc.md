@@ -10,7 +10,7 @@
 1. [Download ICU source code package](http://site.icu-project.org/download)  and extract it to anywhere you like.
 2. Open "**<path_to_icu_source_code_directory>\source\allinone\allinone.sln**" with Visual Studio.
 3. Switch to Intel C++ Compiler.
-4. Replace "**/utf-8**" with "**-Qoption,cpp,--unicode_source_kind,"UTF-8"**" in C/C++ command line.
+4. Replace "**/utf-8**" with "**-Qoption,cpp,--unicode_source_kind,"UTF-8"**" in **[Property->C/C++->Command line]**.
 5. Build the solution.
 
 ## Static library
