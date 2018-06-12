@@ -2,7 +2,7 @@
 
 ## IMPORTANT Notes
 
-- For Windows platform and VS developers ONLY !!!
+- **For Windows platform and VS developers ONLY !!!**
 - You have to install [Visual Studio](https://www.visualstudio.com/downloads/), [Intel C++ Compiler](https://software.intel.com/en-us/c-compilers) and [MSYS2](http://www.msys2.org/) (only for static builds) first.
 
 ## Shared library
