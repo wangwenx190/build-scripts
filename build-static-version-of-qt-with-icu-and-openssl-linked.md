@@ -31,7 +31,7 @@
    Then execute the following commands:
    ```bash
    cd /C/ICU/src/source
-   ./runConfigureICU --enable-static --disable-shared --prefix=$PWD/../../icu4c-x86-static-msvc2017 CFLAGS=-MT CXXFLAGS=-MT
+   ./runConfigureICU MSYS/MSVC --enable-static --disable-shared --prefix=$PWD/../../icu4c-x86-static-msvc2017 CFLAGS=-MT CXXFLAGS=-MT
    make -j4 && make install
    ```
 
