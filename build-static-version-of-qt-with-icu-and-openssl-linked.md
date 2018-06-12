@@ -21,7 +21,7 @@
    pacman -S $MINGW_PACKAGE_PREFIX-make
    ```
 4. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file), "C:\msys64\mingw32\bin\mingw32-make.exe" to "make.exe".
-5. [Download the latest ICU source code package](http://site.icu-project.org/) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
+5. [Download the latest ICU source code package](http://site.icu-project.org/download) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
 6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
@@ -42,14 +42,14 @@
 ## Build static version of Qt
 
 1. [Download the latest Qt source code package](http://download.qt.io/official_releases/qt/) and extract it to anywhere you like. I assume you have extracted it to "C:\Qt\src".
-2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", replace all "-MD" with "-MT" and add "U_STATIC_IMPLEMENTATION" to "DEFINES +=".
+2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", replace all "**-MD**" with "**-MT**" and add "**U_STATIC_IMPLEMENTATION**" to "**DEFINES +=**".
 3. [Use the script I offered to generate the batch script file.](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat)
 4. Open the generated *.bat* file, add the following lines to it and put them to their proper position (you may have to change a little bit if necessary):
    ```bat
    SET "_ICU_DIR=C:\ICU\icu4c-static"
    SET "_OPENSSL_DIR=C:\OpenSSL\openssl-static"
    SET "PATH=%_ICU_DIR%\bin;%_OPENSSL_DIR%\bin;%PATH%"
-   CALL "configure.bat" -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-lsicudt -lsicuin -lsicuio -lsicutest -lsicutu -lsicuuc -lAdvapi32" -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32"
+   CALL "configure.bat" -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-lsicudt -lsicuin -lsicuuc -lAdvapi32" -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32"
    ```
 
 **NOTE**

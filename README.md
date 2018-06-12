@@ -1,3 +1,6 @@
+## build-icu-with-icc.md
+An instruction to help you compile ICU with Intel C++ Compiler (ICC) on Windows.
+
 ## optional-optimization-parameters-for-msvc-compiler.md
 Some optional optimization parameters for MSVC compiler.
 
