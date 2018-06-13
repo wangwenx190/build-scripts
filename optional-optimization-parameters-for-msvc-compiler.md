@@ -31,8 +31,7 @@ QMAKE_CFLAGS_RELEASE = -O2 -Ob2 -Oi -Ot -GT -MD
 QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO = -O2 -Ob2 -Oi -Ot -GT -Zi -MD
 ```
 
-And enable **Link Time Code Generation (LTCG)**: pass "**-ltcg**" to "**configure.bat**" while you are configuring Qt.
+**NOTES**
 
-**NOTE**
-
-Some old Qt versions don't have "QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO" in "msvc-desktop.conf", it's all right, just ignore it.
+- Remember to enable **Link Time Code Generation (LTCG)**: pass "**-ltcg**" to "**configure.bat**" while you are configuring Qt.
+- Some old Qt versions don't have "QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO" in "msvc-desktop.conf", it's all right, just ignore it.

@@ -1,16 +1,19 @@
-## build-icu-with-icc.md
-An instruction to help you compile ICU with Intel C++ Compiler (ICC) on Windows.
+## [optional-optimization-parameters-for-icc.md](/optional-optimization-parameters-for-icc.md)
+Some optional optimization parameters for Intel C++ Compiler (ICC).
 
-## optional-optimization-parameters-for-msvc-compiler.md
+## [build-icu-with-icc.md](/build-icu-with-icc.md)
+An instruction to help you compile ICU with Intel C++ Compiler (ICC) on Windows (include shared builds and static builds).
+
+## [optional-optimization-parameters-for-msvc-compiler.md](/optional-optimization-parameters-for-msvc-compiler.md)
 Some optional optimization parameters for MSVC compiler.
 
-## build-static-version-of-qt-with-icu-and-openssl-linked.md
+## [build-static-version-of-qt-with-icu-and-openssl-linked.md](/build-static-version-of-qt-with-icu-and-openssl-linked.md)
 An instruction to help you compile static version of Qt with static ICU and static OpenSSL linked.
 
-## win-build-qt-msys2.md
+## [win-build-qt-msys2.md](/win-build-qt-msys2.md)
 An instruction to help you compile Qt from source code on Windows through MSYS2.
 
-## win-build-qt.bat
+## [win-build-qt.bat](/win-build-qt.bat)
 A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before running it.
 
 **Usage**
@@ -61,7 +64,7 @@ Windows 10 + MSVC 2017 + Qt 5.11.0/5.6.3
 (Theoretically, this batch script only supports Qt 5.x and newer, it does NOT support Qt4 or any older versions)
 
 
-## win-deploy-qt.bat
+## [win-deploy-qt.bat](/win-deploy-qt.bat)
 A Windows batch script to help you deploy your Qt applications. This script is mainly designed for my personal use, but everyone can use it normally as well (if you don't have any special requirements).
 
 **Usage**
@@ -85,7 +88,7 @@ Windows 10 + MSVC 2017 + Qt 5.11.0
 (Theoretically, this batch script only supports Qt 5.x and newer)
 
 
-## win-build-openssl.bat
+## [win-build-openssl.bat](/win-build-openssl.bat)
 A Windows batch script to help you build OpenSSL. You have to install [Perl](https://www.activestate.com/activeperl) before running this script.
 
 **Usage**
