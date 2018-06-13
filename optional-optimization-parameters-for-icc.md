@@ -16,9 +16,9 @@ C:\Qt\src\qtbase\mkspecs\win32-icc\qmake.conf
 
 ### Optimization parameters
 
-1. Add "**-Ob2 -Oi -Ot -GT -Qftz -Qopt-matmul -Qparallel -Quse-intel-optimized-headers -Qopenmp**" to "**QMAKE_CFLAGS_OPTIMIZE_FULL**":
+1. Add "**-Ob2 -Oi -Ot -GT -Qftz -Qopt-matmul -Qunroll -Qparallel -Quse-intel-optimized-headers -Qopenmp**" to "**QMAKE_CFLAGS_OPTIMIZE_FULL**":
    ```text
-   QMAKE_CFLAGS_OPTIMIZE_FULL = -O3 -Ob2 -Oi -Ot -GT -Qftz -Qopt-matmul -Qparallel -Quse-intel-optimized-headers -Qopenmp
+   QMAKE_CFLAGS_OPTIMIZE_FULL = -O3 -Ob2 -Oi -Ot -GT -Qftz -Qopt-matmul -Qunroll -Qparallel -Quse-intel-optimized-headers -Qopenmp
    ```
 2. Add "**QMAKE_CFLAGS_RELEASE**" and "**QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO**" below "**QMAKE_CFLAGS_OPTIMIZE_FULL**":
    ```text
