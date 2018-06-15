@@ -37,7 +37,7 @@ IF /I "%_COMP_MODE%" NEQ "release" (
 SET _CFG_PARAMS=Configure %_PLATFORM% no-asm enable-static-engine --prefix="%_INSTALL_DIR%" %_EXTRA_PARAMS%
 IF /I "%_TARGET_ARCH%" NEQ "x64" SET _CFG_PARAMS=%_CFG_PARAMS% -DUNICODE -D_UNICODE
 IF /I "%_OPENSSL_VERSION%" NEQ "1.0.2" (
-    IF /I "%_BUILD_TYPE%" NEQ "dll" SET _CFG_PARAMS=%_CFG_PARAMS% no-shared -static
+    IF /I "%_BUILD_TYPE%" NEQ "dll" SET _CFG_PARAMS=%_CFG_PARAMS% no-shared
     IF /I "%_BUILD_TYPE%" NEQ "lib" SET _CFG_PARAMS=%_CFG_PARAMS% enable-md2 enable-rc5 enable-heartbeats
 )
 perl %_CFG_PARAMS%
