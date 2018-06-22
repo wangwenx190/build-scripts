@@ -110,6 +110,6 @@ CALL "C:\openssl\1.0.2\win-build-openssl.bat" 1.0.2 x86 lib debug "C:\openssl\1.
 
 **Tested on**
 
-Windows 10 + MSVC 2017 + OpenSSL 1.0.2.x & 1.1.0.x
+Windows 10 + MSVC 2017 + OpenSSL 1.0.2.x & 1.1.x
 
-(Theoretically, this batch script only supports OpenSSL 1.0.2.x and 1.1.0.x)
+(Theoretically, this batch script only supports OpenSSL 1.0.2.x and 1.1.x)
