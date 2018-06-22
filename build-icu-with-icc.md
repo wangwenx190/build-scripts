@@ -28,7 +28,6 @@
    rem the following paths may be different from your's, just for example
    call "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat" ia32 vs2017
    rem to build 64-bit icu: call "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat" intel64 vs2017
-   set MSYS2_PATH_TYPE=inherit
    call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
    rem to build 64-bit icu: call "C:\msys64\msys2_shell.cmd" -mingw64 -use-full-path
    ```

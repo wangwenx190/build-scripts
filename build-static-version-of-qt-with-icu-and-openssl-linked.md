@@ -25,7 +25,6 @@
 6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
-   set MSYS2_PATH_TYPE=inherit
    call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
    ```
    Then execute the following commands:
