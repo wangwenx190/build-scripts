@@ -18,10 +18,10 @@
 1. [Download ICU source code package](http://site.icu-project.org/download)  and extract it to anywhere you like.
 2. Open "**<path_to_icu_source_code_directory>\source\runConfigureICU**", replace all "**cl**" with "**icl**", "**-MD**" with "**-MT**".
 3. Open "**<path_to_icu_source_code_directory>\source\config\mh-msys-msvc**" and do the following changes:
-   - find "**ifeq ($(ENABLE_RELEASE),1)**", add "**CFLAGS+=-O3 -Ob2 -Oi -Ot -GT -Qipo -DU_RELEASE=1#M#**" below it and change "**CPPFLAGS+=-DU_RELEASE=1#M#**" to "**CPPFLAGS+=-O3 -Ob2 -Oi -Ot -GT -Qipo -DU_RELEASE=1#M#**".
-   - find "**ifeq ($(ENABLE_DEBUG),1)**", add "**CFLAGS+=-Od -Qno-ipo -D_DEBUG=1#M#**" below it and change "**CPPFLAGS+=-D_DEBUG=1#M#**" to "**CPPFLAGS+=-Od -Qno-ipo -D_DEBUG=1#M#**".
-   - find "**CFLAGS+=-GF -nologo -utf-8**" and change it to "**CFLAGS+=-GF -nologo -Zc:wchar_t -Qprec -Zm200 -Zc:strictStrings -FS -Qoption,cpp,--unicode_source_kind,"UTF-8"**".
-   - find "**CXXFLAGS+=-GF -nologo -EHsc -Zc:wchar_t -utf-8**" and change it to "**CXXFLAGS+=-GF -nologo -EHsc -Zc:wchar_t -Qprec -Zm200 -Zc:forScope -FS -Zc:referenceBinding -Zc:strictStrings -Zc:throwingNew -Zc:rvalueCast -Zc:inline -Qstd=c++11 -Qoption,cpp,--unicode_source_kind,"UTF-8"**".
+   - find "**ifeq ($(ENABLE_RELEASE),1)**", add "**CFLAGS+=-O2 -DU_RELEASE=1#M#**" below it and change "**CPPFLAGS+=-DU_RELEASE=1#M#**" to "**CPPFLAGS+=-O2 -DU_RELEASE=1#M#**".
+   - find "**ifeq ($(ENABLE_DEBUG),1)**", add "**CFLAGS+=-Od -D_DEBUG=1#M#**" below it and change "**CPPFLAGS+=-D_DEBUG=1#M#**" to "**CPPFLAGS+=-Od -D_DEBUG=1#M#**".
+   - find "**CFLAGS+=-GF -nologo -utf-8**" and change it to "**CFLAGS+=-GF -nologo -Zc:wchar_t -Qprec -Zm200 -Qoption,cpp,--unicode_source_kind,"UTF-8" -W3 -Qdiag-disable:673,809,1738,1744,3373**".
+   - find "**CXXFLAGS+=-GF -nologo -EHsc -Zc:wchar_t -utf-8**" and change it to "**CXXFLAGS+=-GF -nologo -EHsc -Zc:wchar_t -Qprec -Zm200 -Zc:forScope -Qstd=c++11 -Qoption,cpp,--unicode_source_kind,"UTF-8" -W3 -Qdiag-disable:673,809,1738,1744,3373**".
    - replace all "**LINK.EXE**" with "**xilink**", "**LIB.EXE**" with "**xilib**".
 4. Open cmd shell, execute the following commands:
    ```bat
