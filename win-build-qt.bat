@@ -83,6 +83,7 @@ SET "_JOM=nmake"
 REM You can change "nmake" to "jom" manually after the script was generated
 IF EXIST "jom.exe" SET "_JOM=jom"
 IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_JOM=mingw32-make"
+SET "_D3D_COMPILER_XX_DLL=%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\%_TARGET_ARCH%\d3dcompiler_47.dll"
 TITLE Configure finished
 CLS
 ECHO The configuring process have finished successfully
@@ -142,6 +143,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
         @ECHO %_JOM% ^&^& %_JOM% install
     )
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
+    @ECHO IF EXIST "%_D3D_COMPILER_XX_DLL%" COPY /Y "%_D3D_COMPILER_XX_DLL%" "%_INSTALL_DIR%\bin\d3dcompiler_47.dll"
     @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
     @ECHO     @ECHO Prefix=..
