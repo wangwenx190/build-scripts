@@ -33,12 +33,20 @@ IF /I "%_QT_VERSION:~0,2%" == "4." ECHO This script does NOT support Qt4! && GOT
 IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
 SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
-    REM According to Qt official wiki, QWebEngine module cannot be compiled statically, so we have to skip it
-    REM If you are using MinGW/MinGW-w64, adding "-static-runtime" will result in compilation failure, I don't know why
+    REM According to Qt official wiki,
+    REM QWebEngine module cannot be compiled statically, so we have to skip it.
+    REM If you are using MinGW/MinGW-w64,
+    REM adding "-static-runtime" will result in compilation failure,
+    REM I don't know why, you'd better remove it manually.
     SET "_BUILD_TYPE=-static -static-runtime -skip qtwebengine"
 ) ELSE (
-    REM If you want to compile QWebEngine, you have to change your system locale to English(United States)
-    REM And don't forget to change it back after compiling Qt
+    REM If you want to compile QWebEngine,
+    REM you have to change your system locale to English(United States).
+    REM And don't forget to change it back after compiling Qt.
+    REM And according to Qt official wiki,
+    REM QWebEngine module can only be compiled by VS2017 now(only on Windows platform),
+    REM all other compilers are not supported,
+    REM including VS2015 and Intel C++ Compiler(ICC).
     SET "_BUILD_TYPE=-shared"
 )
 SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
@@ -53,7 +61,14 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -silent -nomake examples -nomake tests -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+REM Cross compile example for i686-w64-mingw32-g++(MinGW-w64):
+REM configure -xplatform win32-g++ -device-option CROSS_COMPILE=i686-w64-mingw32-
+REM It means you should use "-xplatform" instead of "-platform" and
+REM add "-device-option CROSS_COMPILE=".
+REM The compilation may fail because some exe file names are not
+REM correct and thus the build system can't find them.
+REM Don't worry, just change their file names to what they should be.
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -silent -nomake examples -nomake tests -nomake tools -skip qtdoc -skip qttranslations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
 IF /I "%_QT_VERSION:~0,4%" == "5.0." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
 IF /I "%_QT_VERSION:~0,4%" == "5.1." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
 IF /I "%_QT_VERSION:~0,4%" == "5.2." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
