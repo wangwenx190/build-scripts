@@ -63,14 +63,14 @@ REM add "-device-option CROSS_COMPILE=".
 REM The compilation may fail because some exe file names are not
 REM correct and thus the build system can't find them.
 REM Don't worry, just change their file names to what they should be.
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -optimize-size -silent -nomake examples -nomake tests -nomake tools -skip qtdoc -skip qttranslations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
-IF /I "%_QT_VERSION:~0,4%" == "5.0." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.1." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.2." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.3." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.4." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.5." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
-IF /I "%_QT_VERSION:~0,4%" == "5.6." SET "_CFG_PARAMS=%_CFG_PARAMS% target xp"
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -optimize-size -silent -nomake examples -nomake tests -nomake tools -nomake docs -nomake translations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+IF /I "%_QT_VERSION:~0,4%" == "5.0." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.1." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.2." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.3." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.4." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.5." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
+IF /I "%_QT_VERSION:~0,4%" == "5.6." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
 SET "_CFG_BAT=%_ROOT%\configure.bat"
 REM If you don't have jom, use nmake instead, which is provided by Visual Studio.
 REM nmake is very slow, I recommend you use jom, you can download the latest jom
@@ -167,7 +167,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO     @ECHO echo Remember to call vcvarsall.bat to complete environment setup!
     @ECHO ^)
     @ECHO CD /D "%%~dp0"
-    @ECHO IF EXIST "%_INSTALL_DIR%\doc" RD /S /Q "%_INSTALL_DIR%\doc"
+    REM @ECHO IF EXIST "%_INSTALL_DIR%\doc" RD /S /Q "%_INSTALL_DIR%\doc"
     @ECHO RD /S /Q "%_ROOT%"
     @ECHO TITLE Compiling process finished
     @ECHO CLS
