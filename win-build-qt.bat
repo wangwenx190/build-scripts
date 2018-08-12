@@ -44,12 +44,25 @@ IF /I "%_BUILD_TYPE%" == "lib" (
     REM you have to change your system locale to English(United States).
     REM And don't forget to change it back after compiling Qt.
     REM And according to Qt official wiki,
-    REM QWebEngine module can only be compiled by VS2017 now(only on Windows platform),
+    REM QWebEngine module can only be compiled by VS2017 now,
     REM all other compilers are not supported,
-    REM including VS2015 and Intel C++ Compiler(ICC).
+    REM including VS2015 and Intel C++ Compiler(ICC)
+    REM (only on Windows platform and building Qt 5.11+).
     SET "_BUILD_TYPE=-shared"
 )
+REM Using the latest MSVC compiler on Windows platform is the best choice,
+REM you will finish the compilation with no errors and warnings.
+REM You may fail to compile some repositories if you are using
+REM Intel C++ Compiler(ICC), your only choice is to skip them.
 SET "_VC_BAT_PATH=%VS2017INSTALLDIR%\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Professional\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Community\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat"
+IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+REM According to some comments, the below path may not work, so skip it.
+REM IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\14.0\VC\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET "_VC_BAT_PATH=%VCINSTALLDIR%\vcvarsall.bat"
 IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
@@ -63,7 +76,18 @@ REM add "-device-option CROSS_COMPILE=".
 REM The compilation may fail because some exe file names are not
 REM correct and thus the build system can't find them.
 REM Don't worry, just change their file names to what they should be.
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -optimize-size -silent -nomake examples -nomake tests -nomake tools -skip qtdoc -skip qttranslations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+REM Use "-optimize-size" to reduce the binary file size,
+REM however, it will affect the performance of the code, but not much.
+REM Remove "-nomake tools" if you want to build Qt Designer,
+REM Qt Linguist and Qt Assistant.
+REM According to Qt official wiki, use "-opengl dynamic" is highly recommended,
+REM but you will need libEGL.dll, libGLESv2.dll, opengl32sw.dll
+REM and d3dcompiler_47.dll, which is about 20~30MB.
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -silent -nomake examples -nomake tests -nomake tools -skip qtdoc -skip qttranslations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+REM The last version of Qt that supports Windows XP is Qt 5.6,
+REM you have to add "-target xp" to explicitly enable it,
+REM from Qt 5.7+ the configure system had removed this parameter,
+REM and Qt itself didn't support Windows XP anymore either.
 IF /I "%_QT_VERSION:~0,4%" == "5.0." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
 IF /I "%_QT_VERSION:~0,4%" == "5.1." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
 IF /I "%_QT_VERSION:~0,4%" == "5.2." SET "_CFG_PARAMS=%_CFG_PARAMS% -target xp"
