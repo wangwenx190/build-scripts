@@ -168,6 +168,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     )
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO IF EXIST "%_D3D_COMPILER_XX_DLL%" COPY /Y "%_D3D_COMPILER_XX_DLL%" "%_INSTALL_DIR%\bin\d3dcompiler_47.dll"
+    @ECHO REM Remember to download "opengl32sw.dll" from "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/".
     @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
     @ECHO     @ECHO Prefix=..
