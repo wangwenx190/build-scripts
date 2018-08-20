@@ -84,7 +84,7 @@ REM Qt Linguist and Qt Assistant.
 REM According to Qt official wiki, use "-opengl dynamic" is highly recommended,
 REM but you will need libEGL.dll, libGLESv2.dll, opengl32sw.dll
 REM and d3dcompiler_47.dll, which is about 20~30MB.
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -silent -nomake examples -nomake tests -nomake tools -skip qtdoc -skip qttranslations -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -nomake examples -nomake tests -nomake tools -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
 REM The last version of Qt that supports Windows XP is Qt 5.6,
 REM you have to add "-target xp" to explicitly enable it,
 REM from Qt 5.7+ the configure system had removed this parameter,
@@ -193,7 +193,6 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO     @ECHO echo Remember to call vcvarsall.bat to complete environment setup!
     @ECHO ^)
     @ECHO CD /D "%%~dp0"
-    @ECHO IF EXIST "%_INSTALL_DIR%\doc" RD /S /Q "%_INSTALL_DIR%\doc"
     @ECHO RD /S /Q "%_ROOT%"
     @ECHO TITLE Compiling process finished
     @ECHO CLS
