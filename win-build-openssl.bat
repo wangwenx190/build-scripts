@@ -41,6 +41,7 @@ IF /I "%_COMP_MODE%" NEQ "release" (
         SET "_PLATFORM=%_PLATFORM% --debug"
     )
 )
+IF EXIST "%_INSTALL_DIR%" RD /S /Q "%_INSTALL_DIR%"
 SET _CFG_PARAMS=Configure %_PLATFORM% no-asm enable-static-engine --prefix="%_INSTALL_DIR%" %_EXTRA_PARAMS%
 IF /I "%_TARGET_ARCH%" NEQ "x64" SET _CFG_PARAMS=%_CFG_PARAMS% -DUNICODE -D_UNICODE
 IF /I "%_OPENSSL_VERSION%" NEQ "1.0.2" (
