@@ -13,6 +13,10 @@ A Windows batch script to help you compile the Mesa 3D Graphics Library from sou
    - Option3: Mesa source code dir
    - Option4: Mesa install dir
 
+**Tested on**
+
+Windows 10 + MSVC2017 + LLVM 6.0.1 + Mesa 18.2.0rc3
+
 ## [win-build-llvm.bat](/win-build-llvm.bat)
 A Windows batch script to help you compile LLVM/Clang from source code. You should install Visual Studio 2017, Windows 10 SDK, Python 2.7 and CMake first.
 
