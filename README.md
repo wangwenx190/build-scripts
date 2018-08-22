@@ -29,12 +29,17 @@ A Windows batch script to help you compile LLVM/Clang from source code. You shou
    - Option2: LLVM source code dir
    - Option3: LLVM install dir
 
-### Build LLVM with Clang
+### Build full LLVM(including Clang)
 1. Download LLVM source code package from http://releases.llvm.org/ and extract it.
-2. Download Clang source code package from http://releases.llvm.org/ . Eg: cfe-6.0.1.src.tar.xz
-3. Extract it and rename the extracted source code directory to "**clang**".
-4. Move the directory to "**<LLVM_SRC_DIR>\tools**", it means Clang source code should be in "**<LLVM_SRC_DIR>\tools\clang**".
-5. Open cmd or power shell and call this batch script. Command line arguements are the same as above.
+2. Download Clang source code package(Eg: cfe-6.0.1.src.tar.xz), extract it and rename it to "**clang**", then move the directory to "**<LLVM_SRC_DIR>\tools**", which means Clang source code should be in "**<LLVM_SRC_DIR>\tools\clang**".
+3. Download Extra Clang Tools source code package(Eg: clang-tools-extra-6.0.1.src.tar.xz), extract it and rename it to "**extra**", then move the directory to "**<CLANG_SRC_DIR>\tools**", which means Extra Clang Tools source code should be in "**<LLVM_SRC_DIR>\tools\clang\tools\extra**".
+4. Download LLD linker source code package(Eg: lld-6.0.1.src.tar.xz), extract it and rename it to "**lld**", then move the directory to "**<LLVM_SRC_DIR>\tools**", which means LLD linker source code should be in "**<LLVM_SRC_DIR>\tools\lld**".
+5. Download Polly Loop Optimizer source code package(Eg: polly-6.0.1.src.tar.xz), extract it and rename it to "**polly**", then move the directory to "**<LLVM_SRC_DIR>\tools**", which means Polly Loop Optimizer source code should be in "**<LLVM_SRC_DIR>\tools\polly**".
+6. Download Compiler-RT source code package(Eg: compiler-rt-6.0.1.src.tar.xz), extract it and rename it to "**compiler-rt**", then move the directory to "**<LLVM_SRC_DIR>\projects**", which means Compiler-RT source code should be in "**<LLVM_SRC_DIR>\projects\compiler-rt**".
+7. Download Libomp source code package(Eg: openmp-6.0.1.src.tar.xz), extract it and rename it to "**openmp**", then move the directory to "**<LLVM_SRC_DIR>\projects**", which means Libomp source code should be in "**<LLVM_SRC_DIR>\projects\openmp**".
+8. Download libcxx and libcxxabi source code package(Eg: libcxx-6.0.1.src.tar.xz and libcxxabi-6.0.1.src.tar.xz), extract them and rename them to "**libcxx**" and "**libcxxabi**", then move them to "**<LLVM_SRC_DIR>\projects**", which means libcxx and libcxxabi source code should be in "**<LLVM_SRC_DIR>\projects\libcxx**" and "**<LLVM_SRC_DIR>\projects\libcxxabi**".
+9. Download Test Suite source code package(Eg: test-suite-6.0.1.src.tar.xz), extract it and rename it to "**test-suite**", then move the directory to "**<LLVM_SRC_DIR>\projects**", which means Test Suite source code should be in "**<LLVM_SRC_DIR>\projects\test-suite**".
+10. Open cmd or power shell and call this batch script. Command line arguements are the same as above.
 
 **Tested on**
 
