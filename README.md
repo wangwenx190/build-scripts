@@ -1,5 +1,26 @@
 ## [Suggestions are always welcome.](https://github.com/wangwenx190/build-scripts/issues)
 
+## [win-build-llvm.bat](/win-build-llvm.bat)
+A Windows batch script to help you compile LLVM/Clang from source code. You should install Visual Studio 2017, Python and CMake first.
+### Build LLVM without Clang(default)
+1. Download LLVM source code package from http://releases.llvm.org/ . Eg: llvm-6.0.1.src.tar.xz
+2. Extract it and open cmd or power shell.
+3. CALL "Script file path" [Option1] [Option2] [Option3]
+   - Script file path: The relative/absolute path of the batch file
+   - Option1: Target architecture, x86 or x64, default is x64
+   - Option2: LLVM source code dir
+   - Option3: LLVM install dir
+### Build LLVM with Clang
+1. Download LLVM source code package from http://releases.llvm.org/ and extract it.
+2. Download Clang source code package from http://releases.llvm.org/ . Eg: cfe-6.0.1.src.tar.xz
+3. Extract it and rename the extracted source code directory to "**clang**".
+4. Move the directory to "**<LLVM_SRC_DIR>\tools**", it means Clang source code should be in "**<LLVM_SRC_DIR>\tools\clang**".
+5. Open cmd or power shell and call this batch script. Command line arguements are the same as above.
+
+**Tested on**
+
+Windows 10 + MSVC2017 + LLVM/Clang 6.0.1
+
 ## [optional-optimization-parameters-for-icc.md](/optional-optimization-parameters-for-icc.md)
 Some optional optimization parameters for Intel C++ Compiler (ICC).
 
@@ -16,7 +37,7 @@ An instruction to help you compile static version of Qt with static ICU and stat
 An instruction to help you compile Qt from source code on Windows through MSYS2.
 
 ## [win-build-qt.bat](/win-build-qt.bat)
-A Windows batch script to help you compile Qt from source code. You must know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before running it.
+A Windows batch script to help you compile Qt from source code. You should know that this batch script can only help you on configuring the compiler, it will not install anything to your system, you still have to install all the prerequisites manually before running it.
 
 **Usage**
 1. Open cmd or power shell.
