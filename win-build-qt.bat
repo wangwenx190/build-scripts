@@ -123,10 +123,11 @@ REM download.qt.io/official_releases/jom/jom.zip
 REM Remember to add it's path to your system path variables
 REM or just put it into "src\gnuwin32\bin", this directory will be added to
 REM the PATH variable temporarily during the compiling process.
-REM If you are intend to use nmake, you can pass "-mp" to configure command line,
-REM which can use multiple processors for compilation.
-SET "_JOM=jom"
-IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_JOM=mingw32-make"
+REM If you have to use nmake, you can pass "-mp" to configure command line,
+REM which can use multiple processors for compilation, and remember to
+REM remove "-make-tool jom" and replace all "jom" with "nmake" in your script.
+SET "_MAKE_TOOL=jom"
+IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_MAKE_TOOL=mingw32-make"
 SET "_D3D_COMPILER_XX_DLL=%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\%_TARGET_ARCH%\d3dcompiler_47.dll"
 TITLE Configure finished
 CLS
@@ -138,7 +139,7 @@ ECHO Target architecture: %_TARGET_ARCH%
 ECHO Source code directory: %_ROOT%
 ECHO Install directory: %_INSTALL_DIR%
 IF /I "%_QT_COMPILER:~-3%" NEQ "g++" ECHO Compiler batch script: %_VC_BAT_PATH%
-ECHO Build tool: %_JOM%
+ECHO Build tool: %_MAKE_TOOL%
 ECHO Qt configuration parameters: %_CFG_PARAMS%
 ECHO ---------------------------------------
 ECHO If everything is all right, press any key to generate the build script
@@ -182,9 +183,9 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO CALL "%_CFG_BAT%" %_CFG_PARAMS%
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     IF /I "%_QT_COMPILER:~-3%" == "g++" (
-        @ECHO %_JOM% -j 4 ^&^& %_JOM% install
+        @ECHO %_MAKE_TOOL% -j 4 ^&^& %_MAKE_TOOL% install
     ) ELSE (
-        @ECHO %_JOM% ^&^& %_JOM% install
+        @ECHO %_MAKE_TOOL% ^&^& %_MAKE_TOOL% install
     )
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO IF EXIST "%_D3D_COMPILER_XX_DLL%" COPY /Y "%_D3D_COMPILER_XX_DLL%" "%_INSTALL_DIR%\bin\d3dcompiler_47.dll"
