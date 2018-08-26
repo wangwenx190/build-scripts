@@ -35,6 +35,7 @@ SET "_COMP_MODE=-%_COMP_MODE%"
 IF /I "%_BUILD_TYPE%" == "lib" (
     REM According to Qt official wiki,
     REM QWebEngine module cannot be compiled statically, so we have to skip it.
+    REM --------------------------------------------------------------------
     REM If you are using MinGW/MinGW-w64,
     REM adding "-static-runtime" will result in compilation failure,
     REM I don't know why, you'd better remove it manually.
@@ -43,6 +44,7 @@ IF /I "%_BUILD_TYPE%" == "lib" (
     REM If you want to compile QWebEngine,
     REM you have to change your system locale to English(United States).
     REM And don't forget to change it back after compiling Qt.
+    REM -------------------------------------------------------
     REM And according to Qt official wiki,
     REM QWebEngine module can only be compiled by VS2017 now,
     REM all other compilers are not supported,
@@ -77,14 +79,31 @@ REM add "-device-option CROSS_COMPILE=".
 REM The compilation may fail because some exe file names are not
 REM correct and thus the build system can't find them.
 REM Don't worry, just change their file names to what they should be.
+REM -------------------------------------
 REM Use "-optimize-size" to reduce the binary file size,
 REM however, it will affect the performance of the code, but not much.
+REM This parameter is not supported by Qt 5.6 and older Qt versions,
+REM but you can also replace all "-O2" with "-O1" in "msvc-desktop.conf"
+REM to achieve the same effect, the file is located in "qtbase\mkspecs\common".
+REM ----------------------------------------
+REM Use "-ltcg" means to enable Link Time Code Generation,
+REM which is the "Whole program/application optimization" in VC++.
+REM I recommend you enable LTCG, because this will not only reduce
+REM the binary size but also make your code faster.
+REM But enable LTCG will slow down the compilation process and
+REM increase the CPU and memory use.
+REM ---------------------------------------
 REM Remove "-nomake tools" if you want to build Qt Designer,
 REM Qt Linguist and Qt Assistant.
+REM ----------------------------------------
 REM According to Qt official wiki, use "-opengl dynamic" is highly recommended,
 REM but you will need libEGL.dll, libGLESv2.dll, opengl32sw.dll
 REM and d3dcompiler_47.dll, which is about 20~30MB.
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -nomake examples -nomake tests -nomake tools -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+REM --------------------------------------------
+REM Remember to remove "-silent" if you are building Qt 5.6 and older
+REM Qt versions, it is a newly added parameter and cannot be recognized
+REM by previous Qt configuration system.
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -make-tool jom -silent -nomake examples -nomake tests -nomake tools -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
 REM The last version of Qt that supports Windows XP is Qt 5.6,
 REM you have to add "-target xp" to explicitly enable it,
 REM from Qt 5.7+ the configure system had removed this parameter,
@@ -104,9 +123,9 @@ REM download.qt.io/official_releases/jom/jom.zip
 REM Remember to add it's path to your system path variables
 REM or just put it into "src\gnuwin32\bin", this directory will be added to
 REM the PATH variable temporarily during the compiling process.
-SET "_JOM=nmake"
-REM You can change "nmake" to "jom" manually after the script was generated
-IF EXIST "jom.exe" SET "_JOM=jom"
+REM If you are intend to use nmake, you can pass "-mp" to configure command line,
+REM which can use multiple processors for compilation.
+SET "_JOM=jom"
 IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_JOM=mingw32-make"
 SET "_D3D_COMPILER_XX_DLL=%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\%_TARGET_ARCH%\d3dcompiler_47.dll"
 TITLE Configure finished
