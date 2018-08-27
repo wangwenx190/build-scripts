@@ -17,7 +17,7 @@
    call configure.bat -no-rtti
    ```
 
-- Use shared MSVCRT library
+- Use shared MSVCRT library(-MD, default)
 
 - Disable C/C++ exception
 
