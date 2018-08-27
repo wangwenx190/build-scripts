@@ -1,5 +1,8 @@
 ## [Suggestions are always welcome.](https://github.com/wangwenx190/build-scripts/issues)
 
+## [msvc-reduce-qt-binary-file-size.md](/msvc-reduce-qt-binary-file-size.md)
+How to reduce Qt binary file size for MSVC compiler on Windows.
+
 ## [win-build-mesa.bat](/win-build-mesa.bat)
 A Windows batch script to help you compile the Mesa 3D Graphics Library from source code. You should install Visual Studio 2017, Windows 10 SDK, Python 2.7, [pywin32 for Python](https://github.com/mhammond/pywin32/releases), [flex and bison](https://sourceforge.net/projects/winflexbison/) and LLVM first.
 
