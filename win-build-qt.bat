@@ -191,17 +191,17 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO ^> "%_INSTALL_DIR%\bin\qt.conf" ^(
     @ECHO     @ECHO [Paths]
     @ECHO     @ECHO Prefix=..
-    @ECHO     @ECHO HostPrefix=..
-    @ECHO     @ECHO Sysroot=
-    @ECHO     @ECHO SysrootifyPrefix=false
-    @ECHO     @ECHO TargetSpec=%_QT_COMPILER%
-    @ECHO     @ECHO HostSpec=%_QT_COMPILER%
+    REM @ECHO     @ECHO HostPrefix=..
+    REM @ECHO     @ECHO Sysroot=
+    REM @ECHO     @ECHO SysrootifyPrefix=false
+    REM @ECHO     @ECHO TargetSpec=%_QT_COMPILER%
+    REM @ECHO     @ECHO HostSpec=%_QT_COMPILER%
     @ECHO     @ECHO Documentation=../../Docs/Qt-%_QT_VERSION%
     @ECHO     @ECHO Examples=../../Examples/Qt-%_QT_VERSION%
-    @ECHO     @ECHO [DevicePaths]
-    @ECHO     @ECHO Prefix=..
-    @ECHO     @ECHO [EffectivePaths]
-    @ECHO     @ECHO Prefix=..
+    REM @ECHO     @ECHO [DevicePaths]
+    REM @ECHO     @ECHO Prefix=..
+    REM @ECHO     @ECHO [EffectivePaths]
+    REM @ECHO     @ECHO Prefix=..
     @ECHO ^)
     @ECHO ^> "%_INSTALL_DIR%\bin\qtenv2.bat" ^(
     @ECHO     @ECHO @echo off
