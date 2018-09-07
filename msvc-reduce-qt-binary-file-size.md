@@ -6,6 +6,10 @@
    ```bat
    call configure.bat -optimize-size
    ```
+   or change `qtbase\mkspecs\common\msvc-desktop.conf`
+   ```bat
+   QMAKE_CFLAGS_OPTIMIZE = -O1 -Os
+   ```
 
 - Enable link time code generation
    ```bat
@@ -13,13 +17,19 @@
    ```
 
 - Disable RTTI
+   change `qtbase\mkspecs\common\msvc-desktop.conf`
    ```bat
-   call configure.bat -no-rtti
+   QMAKE_CXXFLAGS_RTTI_ON =
    ```
 
 - Use shared MSVCRT library(-MD, default)
 
 - Disable C/C++ exception
+   change `qtbase\mkspecs\common\msvc-desktop.conf`
+   ```bat
+   QMAKE_CXXFLAGS_STL_ON =
+   QMAKE_CXXFLAGS_EXCEPTIONS_ON =
+   ```
 
 - Use [UPX](https://github.com/upx/upx/releases) to compress binary files
    ```bat
@@ -29,3 +39,19 @@
    ```bat
    upx --ultra-brute "*.dll"
    ```
+
+- Edit your C++ code
+   ```cpp
+   #ifndef _DEBUG
+   #pragma comment(linker, "/FILEALIGN:16")
+   #pragma comment(linker, "/ALIGN:16")
+   #pragma comment(linker, "/OPT:REF") // can dll use this?
+   #pragma comment(linker, "/OPT:ICF") // can dll use this?
+   #pragma comment(linker, "/OPT:NOWIN98")
+   #pragma comment(linker, "/MERGE:.rdata=.data")
+   #pragma comment(linker, "/MERGE:.text=.data")
+   #pragma comment(linker, "/MERGE:.reloc=.data")
+   #endif
+   ```
+
+- Use [VC-LTL](https://github.com/Chuyu-Team/VC-LTL) to reduce MSVCRT library size
