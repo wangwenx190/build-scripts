@@ -17,6 +17,7 @@
    ```
 
 - Disable RTTI
+
    change `qtbase\mkspecs\common\msvc-desktop.conf`
    ```bat
    QMAKE_CXXFLAGS_RTTI_ON =
@@ -25,6 +26,7 @@
 - Use shared MSVCRT library(-MD, default)
 
 - Disable C/C++ exception
+
    change `qtbase\mkspecs\common\msvc-desktop.conf`
    ```bat
    QMAKE_CXXFLAGS_STL_ON =
