@@ -23,7 +23,7 @@
    QMAKE_CXXFLAGS_RTTI_ON =
    ```
 
-- Use shared MSVCRT library(-MD, default)
+- Use [VC-LTL](https://github.com/Chuyu-Team/VC-LTL) to reduce MSVCRT library size
 
 - Disable C/C++ exception
 
@@ -41,13 +41,3 @@
    ```bat
    upx --ultra-brute "*.dll"
    ```
-
-- Edit your C++ code
-   ```cpp
-   #ifndef _DEBUG
-   #pragma comment(linker, "/OPT:REF")
-   #pragma comment(linker, "/OPT:ICF")
-   #endif
-   ```
-
-- Use [VC-LTL](https://github.com/Chuyu-Team/VC-LTL) to reduce MSVCRT library size
