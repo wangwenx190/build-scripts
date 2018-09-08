@@ -1,5 +1,10 @@
 ## [Suggestions are always welcome.](https://github.com/wangwenx190/build-scripts/issues)
 
+## [win-setup-qt-env.bat](/win-setup-qt-env.bat)
+A batch script to help you init Qt command line environment.
+
+**Usage**: Create a symbol link shortcut, the path is: `%comspec% /k "path_of_this_file"`
+
 ## [msvc-reduce-qt-binary-file-size.md](/msvc-reduce-qt-binary-file-size.md)
 How to reduce Qt binary file size for MSVC compiler on Windows.
 
