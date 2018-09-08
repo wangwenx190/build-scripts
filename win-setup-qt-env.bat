@@ -37,6 +37,7 @@ IF EXIST "%_QT_DIR%\bin\qtenv2.bat" (
     SET "PATH=%_QT_DIR%\bin;%_QT_DIR%;%PATH%"
 )
 CD /D "%_QT_DIR%"
-ECHO ----------------------------
-ECHO |   Environment is ready   |
-ECHO ----------------------------
+CLS
+ECHO --------------------------------------------
+ECHO │   Qt command line environment is ready   │
+ECHO --------------------------------------------
