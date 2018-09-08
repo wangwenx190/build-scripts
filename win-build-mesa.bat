@@ -30,6 +30,8 @@ IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=%VCINSTALLDIR%\vcvarsall.bat
 IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=
 IF NOT EXIST "%_VC_BAT_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install vs in it's default location, please change this script && GOTO Fin
 CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%
+IF EXIST "%_MESA_SRC_DIR%\win_flex_bison" SET "PATH=%_MESA_SRC_DIR%\win_flex_bison;%PATH%"
+IF EXIST "%_MESA_SRC_DIR%\..\win_flex_bison" SET "PATH=%_MESA_SRC_DIR%\..\win_flex_bison;%PATH%"
 CD /D %_MESA_SRC_DIR%
 IF /I "%_TARGET_ARCH%" == "x64" SET _TARGET_ARCH=x86_64
 scons build=release platform=windows machine=%_TARGET_ARCH% libgl-gdi
