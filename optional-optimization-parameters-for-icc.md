@@ -4,6 +4,7 @@
 
 - The following parameters are for Windows platform only, if you are using Linux, you need change a little bit.
 - ICC does **NOT** support "**/utf-8**", use "**-Qoption,cpp,--unicode_source_kind,"UTF-8"**" instead.
+- The following parameters will increase the binary file size enormously!
 
 ### Configuration file
 

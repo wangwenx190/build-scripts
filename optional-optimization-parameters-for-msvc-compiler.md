@@ -4,6 +4,7 @@
 
 1. Intel C++ Compiler (ICC) uses MSVC compiler as it's backend on Windows platform, so you can also use these parameters in ICC.
 2. If you are using ICC, you can use the highest optimization level: **O3**.
+3. The following parameters will increase the binary file size enormously!
 
 ### Configuration file
 
