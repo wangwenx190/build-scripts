@@ -5,9 +5,6 @@ A batch script to help you init Qt command line environment.
 
 **Usage**: Put this script file in your Qt directory, then create a symbol link shortcut whose path is: `%comspec% /k "path_of_this_file"`
 
-## [msvc-reduce-qt-binary-file-size.md](/msvc-reduce-qt-binary-file-size.md)
-How to reduce Qt binary file size for MSVC compiler on Windows.
-
 ## [win-build-mesa.bat](/win-build-mesa.bat)
 A Windows batch script to help you compile the Mesa 3D Graphics Library from source code. You should install Visual Studio 2017, Windows 10 SDK, Python 2.7, [pywin32 for Python](https://github.com/mhammond/pywin32/releases), [flex and bison](https://sourceforge.net/projects/winflexbison/) and LLVM first.
 
@@ -54,9 +51,6 @@ Some optional optimization parameters for Intel C++ Compiler (ICC).
 
 ## [build-icu-with-icc.md](/build-icu-with-icc.md)
 An instruction to help you compile ICU with Intel C++ Compiler (ICC) on Windows (include shared builds and static builds).
-
-## [optional-optimization-parameters-for-msvc-compiler.md](/optional-optimization-parameters-for-msvc-compiler.md)
-Some optional optimization parameters for MSVC compiler.
 
 ## [build-static-version-of-qt-with-icu-and-openssl-linked.md](/build-static-version-of-qt-with-icu-and-openssl-linked.md)
 An instruction to help you compile static version of Qt with static ICU and static OpenSSL linked.
