@@ -15,17 +15,14 @@
    Close the shell window forcely and open *MSYS2 MSYS* shell again, execute the following commands:
    ```bash
    pacman -Su
-   ```
-3. Open *MSYS2 MSYS* shell and execute the following commands:
-   ```bash
    pacman -S make binutils
    ```
-4. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file).
-5. [Download the latest ICU source code package](http://site.icu-project.org/download) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
-6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
+3. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file).
+4. [Download the latest ICU source code package](http://site.icu-project.org/download) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
+5. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
-   call "C:\msys64\msys2_shell.cmd" -msys -use-full-path
+   call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
    ```
    Then execute the following commands:
    ```bash
