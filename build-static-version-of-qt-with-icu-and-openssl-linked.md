@@ -16,16 +16,16 @@
    ```bash
    pacman -Su
    ```
-3. Open *MSYS2 MinGW 32-bit* shell and execute the following commands:
+3. Open *MSYS2 MSYS* shell and execute the following commands:
    ```bash
-   pacman -S $MINGW_PACKAGE_PREFIX-make
+   pacman -S make binutils
    ```
-4. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file), "C:\msys64\mingw32\bin\mingw32-make.exe" to "make.exe".
+4. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file).
 5. [Download the latest ICU source code package](http://site.icu-project.org/download) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
 6. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
-   call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
+   call "C:\msys64\msys2_shell.cmd" -msys -use-full-path
    ```
    Then execute the following commands:
    ```bash
