@@ -103,7 +103,7 @@ REM --------------------------------------------
 REM Remember to remove "-silent" if you are building Qt 5.6 and older
 REM Qt versions, it is a newly added parameter and cannot be recognized
 REM by previous Qt configuration system.
-SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -make-tool jom -silent -nomake examples -nomake tests -nomake tools -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
+SET "_CFG_PARAMS=-opensource -confirm-license %_COMP_MODE% %_BUILD_TYPE% -platform %_QT_COMPILER% -make-tool jom -silent -nomake examples -nomake tests -opengl dynamic -prefix ^"%_INSTALL_DIR%^" %_EXTRA_PARAMS%"
 REM The last version of Qt that supports Windows XP is Qt 5.6,
 REM you have to add "-target xp" to explicitly enable it,
 REM from Qt 5.7+ the configure system had removed this parameter,
