@@ -46,9 +46,6 @@ A Windows batch script to help you compile LLVM/Clang from source code. You shou
 
 Windows 10 + MSVC2017 + LLVM/Clang 6.0.1
 
-## [optional-optimization-parameters-for-icc.md](/optional-optimization-parameters-for-icc.md)
-Some optional optimization parameters for Intel C++ Compiler (ICC).
-
 ## [build-icu-with-icc.md](/build-icu-with-icc.md)
 An instruction to help you compile ICU with Intel C++ Compiler (ICC) on Windows (include shared builds and static builds).
 
