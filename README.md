@@ -78,12 +78,16 @@ A Windows batch script to help you compile Qt from source code. You should know 
      SET "_ICU_DIR=your icu dir path"
      SET "PATH=%_ICU_DIR%\bin;%PATH%"
      -icu -I "%_ICU_DIR%\include" -L "%_ICU_DIR%\lib"
+     REM Add ICU_LIBS="-lsicudt -lsicuin -lsicuuc -lAdvAPI32" to it
+     REM if you are building static version of Qt
      ```
    - OpenSSL:
      ```bat
      SET "_OPENSSL_DIR=your openssl dir path"
      SET "PATH=%_OPENSSL_DIR%\bin;%PATH%"
      -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib"
+     REM Add OPENSSL_LIBS="-llibcrypto -llibssl -lGdi32" to it
+     REM if you are building static version of Qt
      ```
    Note:
    - ICU will increase the size of your application for 20~30 MB, if you don't need it then do not link against it, that's also what the Qt Company already did.

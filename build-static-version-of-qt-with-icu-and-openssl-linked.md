@@ -45,7 +45,7 @@
    SET "_ICU_DIR=C:\ICU\icu4c-static"
    SET "_OPENSSL_DIR=C:\OpenSSL\openssl-static"
    SET "PATH=%_ICU_DIR%\bin;%_OPENSSL_DIR%\bin;%PATH%"
-   CALL "configure.bat" -icu -I "%_ICU_DIR%\include" -L "%_ICU_DIR%\lib" -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib"
+   CALL "configure.bat" -icu -I "%_ICU_DIR%\include" -L "%_ICU_DIR%\lib" ICU_LIBS="-lsicudt -lsicuin -lsicuuc -lAdvAPI32" -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib" OPENSSL_LIBS="-llibcrypto -llibssl -lGdi32"
    ```
 
 **NOTE**
