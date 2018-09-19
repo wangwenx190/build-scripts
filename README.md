@@ -75,20 +75,19 @@ A Windows batch script to help you compile Qt from source code. You should know 
 5. If you want to link Qt against [ICU](http://site.icu-project.org/) and [OpenSSL](https://www.openssl.org/) libraries, you will have to change the script file. Please add the following config parameters:
    - ICU:
      ```bat
-     -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS_DEBUG="-licudtd -licuind -licuucd" ICU_LIBS_RELEASE="-licudt -licuin -licuuc"
-     REM If you do not have/need the debug version of ICU, use the following command line
-     REM -icu ICU_PREFIX="%_ICU_DIR%" ICU_LIBS="-licudt -licuin -licuuc"
+     SET "_ICU_DIR=your icu dir path"
+     SET "PATH=%_ICU_DIR%\bin;%PATH%"
+     -icu -I "%_ICU_DIR%\include" -L "%_ICU_DIR%\lib"
      ```
    - OpenSSL:
      ```bat
-     -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS_DEBUG="-lssleay32d -llibeay32d" OPENSSL_LIBS_RELEASE="-lssleay32 -llibeay32"
-     REM If you do not have/need the debug version of OpenSSL, use the following command line
-     REM -openssl-linked OPENSSL_PREFIX="%_OPENSSL_DIR%" OPENSSL_LIBS="-lssleay32 -llibeay32"
+     SET "_OPENSSL_DIR=your openssl dir path"
+     SET "PATH=%_OPENSSL_DIR%\bin;%PATH%"
+     -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib"
      ```
-   Notes:
-   - "%_ICU_DIR%" and "%_OPENSSL_DIR%" are the directories that contain "bin", "lib" and "include" directories of ICU and OpenSSL, remember to set them in the batch script.
-   - ICU will increase the size of your application for about 40MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
-   - Remember to add the ICU and OpenSSL's "bin" directories into your PATH variable, otherwise the whole Qt compiling process will fail.
+   Note:
+   - ICU will increase the size of your application for 20~30 MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
+   - If you are building static version of Qt, do not add ICU and OpenSSL's bin dirs to the path variable, because they do not exist.
 
 Notes:
 - **If you want to compile QWebEngine, you have to change your system locale to English(United States)** and don't forget to change it back after compiling Qt.

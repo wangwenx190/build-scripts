@@ -177,8 +177,12 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO SETLOCAL
     IF /I "%_QT_COMPILER:~-3%" NEQ "g++" @ECHO CALL "%_VC_BAT_PATH%" %_TARGET_ARCH%
     @ECHO SET "PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%%PATH%%"
+    @ECHO REM SET "_ICU_DIR="
+    @ECHO REM SET "_OPENSSL_DIR="
+    @ECHO REM SET "PATH=%%_ICU_DIR%%\bin;%%_OPENSSL_DIR%%\bin;%%PATH%%"
     @ECHO CD /D "%_ROOT%"
     @ECHO CALL "%_CFG_BAT%" %_CFG_PARAMS%
+    @ECHO REM CALL "%_CFG_BAT%" %_CFG_PARAMS% -icu -I "%%_ICU_DIR%%\include" -L "%%_ICU_DIR%%\lib" -openssl-linked -I "%%_OPENSSL_DIR%%\include" -L "%%_OPENSSL_DIR%%\lib"
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     IF /I "%_QT_COMPILER:~-3%" == "g++" (
         @ECHO %_MAKE_TOOL% -j 4 ^&^& %_MAKE_TOOL% install
