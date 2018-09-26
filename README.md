@@ -3,7 +3,7 @@
 ## [win-setup-qt-env.bat](/win-setup-qt-env.bat)
 A batch script to help you init Qt command line environment.
 
-**Usage**: Put this script file in your Qt directory, then create a symbol link shortcut whose path is: `%comspec% /k "path_of_this_file"`
+**Usage**: Put this script file in your Qt directory, then create a symbol link shortcut whose path is: `%comspec% /k "path_of_this_file" arch`. Eg: `%comspec% /k "C:\Qt\Qt5.12.0\5.12.0\msvc2017\win-setup-qt-env.bat" x64`.
 
 ## [win-build-mesa.bat](/win-build-mesa.bat)
 A Windows batch script to help you compile the Mesa 3D Graphics Library from source code. You should install Visual Studio 2017, Windows 10 SDK, Python 2.7, [pywin32 for Python](https://github.com/mhammond/pywin32/releases), [flex and bison](https://sourceforge.net/projects/winflexbison/) and LLVM first.

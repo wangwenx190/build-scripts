@@ -1,7 +1,8 @@
 @ECHO OFF
 TITLE Qt command line environment
 CLS
-REM Usage: %comspec% /k "path_of_this_file"
+REM Usage: %comspec% /k "path_of_this_file" arch
+REM Eg: %comspec% /k "C:\Qt\Qt5.12.0\5.12.0\msvc2017\win-setup-qt-env.bat" x64
 SET "_ARCH=%1"
 IF /I "%_ARCH%" == "" SET "_ARCH=x86"
 SET "_VC_BAT_PATH=%VS2017INSTALLDIR%\VC\Auxiliary\Build\vcvarsall.bat"
@@ -38,6 +39,6 @@ IF EXIST "%_QT_DIR%\bin\qtenv2.bat" (
 )
 CD /D "%_QT_DIR%"
 CLS
-ECHO ============================================
-ECHO =   Qt command line environment is ready   =
-ECHO ============================================
+ECHO =====================================================
+ECHO =   Qt command line environment(%_ARCH%) is ready   =
+ECHO =====================================================
