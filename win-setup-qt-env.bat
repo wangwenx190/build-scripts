@@ -40,5 +40,5 @@ IF EXIST "%_QT_DIR%\bin\qtenv2.bat" (
 CD /D "%_QT_DIR%"
 CLS
 ECHO =====================================================
-ECHO =   Qt command line environment(%_ARCH%) is ready   =
+ECHO =   Qt command line environment(%_ARCH%) is ready       =
 ECHO =====================================================
