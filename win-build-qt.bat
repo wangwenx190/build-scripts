@@ -217,8 +217,8 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO     @ECHO cd /D ^%%%%~dp0..
     @ECHO     @ECHO echo Remember to call vcvarsall.bat to complete environment setup!
     @ECHO ^)
-    @ECHO CD /D "%%~dp0"
-    @ECHO RD /S /Q "%_ROOT%"
+    @ECHO CD /D "%_ROOT%"
+    @ECHO RD /S /Q build
     @ECHO TITLE Compiling process finished
     @ECHO CLS
     @ECHO ECHO Compiling process have finished successfully
