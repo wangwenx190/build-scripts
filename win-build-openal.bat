@@ -12,6 +12,7 @@ SET _BUILD_TYPE=%2
 SET _OPENAL_SRC_DIR=%3
 SET _OPENAL_INST_DIR=%4
 IF "%_TARGET_ARCH%" == "" SET _TARGET_ARCH=x64
+IF "%_BUILD_TYPE%" == "" SET _BUILD_TYPE=dll
 SET _VC_BAT_PATH=%VS2017INSTALLDIR%\VC\Auxiliary\Build\vcvarsall.bat
 IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Enterprise\VC\Auxiliary\Build\vcvarsall.bat
 IF NOT EXIST "%_VC_BAT_PATH%" SET _VC_BAT_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Professional\VC\Auxiliary\Build\vcvarsall.bat
