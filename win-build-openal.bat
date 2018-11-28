@@ -59,8 +59,8 @@ cmake %_CMAKE_CMD%
 IF %ERRORLEVEL% NEQ 0 ECHO Something wrong happened, please check the log file && GOTO Fin
 msbuild /p:Configuration=Release INSTALL.vcxproj
 IF %ERRORLEVEL% NEQ 0 ECHO Something wrong happened, please check the log file && GOTO Fin
-CD /D "%~dp0"
-RD /S /Q %_OPENAL_SRC_DIR%
+CD /D "%_OPENAL_SRC_DIR%"
+RD /S /Q build
 ECHO Build succeeded
 GOTO Fin
 
