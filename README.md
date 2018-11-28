@@ -1,5 +1,18 @@
 ## [Suggestions are always welcome.](https://github.com/wangwenx190/build-scripts/issues)
 
+## [win-build-openal.bat](/win-build-openal.bat)
+A batch script to help you build OpenAL Soft from source code.
+
+**Usage**
+1. Download or clone source code of OpenAL Soft from https://github.com/kcat/openal-soft .
+2. Extract it and open cmd or power shell.
+3. CALL "Script file path" [Option1] [Option2] [Option3] [Option4]
+   - Script file path: The relative/absolute path of the batch file
+   - Option1: Target architecture, x86 or x64, default is x64
+   - Option2: dll or lib, default is dll
+   - Option3: OpenAL Soft source code dir
+   - Option4: OpenAL Soft install dir
+
 ## [win-setup-qt-env.bat](/win-setup-qt-env.bat)
 A batch script to help you init Qt command line environment.
 
