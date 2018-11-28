@@ -13,6 +13,10 @@ A batch script to help you build OpenAL Soft from source code.
    - Option3: OpenAL Soft source code dir
    - Option4: OpenAL Soft install dir
 
+**Tested on**
+
+Windows 10 + MSVC2017 + OpenAL Soft 1.19.1-git-c2da83d
+
 ## [win-setup-qt-env.bat](/win-setup-qt-env.bat)
 A batch script to help you init Qt command line environment.
 
