@@ -43,8 +43,8 @@
 ## Build static version of Qt
 
 1. [Download the latest Qt source code package](http://download.qt.io/official_releases/qt/) and extract it to anywhere you like. I assume you have extracted it to "C:\Qt\src".
-2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", add "**U_STATIC_IMPLEMENTATION**" to "**DEFINES +=**".
-3. [Use the script I offered to generate the batch script file.](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat), add **-static-runtime** to configure parameters if you want to link to static MSVCRT.
+2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", add "**U_STATIC_IMPLEMENTATION**" to "**DEFINES +=**" (this step is for static version of ICU only, if you don't need ICU, please ignore this step).
+3. [Use the script I offered to generate the batch script file](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat), add **-static-runtime** to configure parameters if you want to link to static MSVCRT.
 4. Open the generated *.bat* file, add the following lines to it and put them to their proper position (you may have to change a little bit if necessary):
    ```bat
    SET "_ICU_DIR=C:\ICU\icu4c-static"
@@ -52,6 +52,7 @@
    SET "PATH=%_ICU_DIR%\bin;%_OPENSSL_DIR%\bin;%PATH%"
    CALL "configure.bat" -icu -I "%_ICU_DIR%\include" -L "%_ICU_DIR%\lib" ICU_LIBS="-lsicudt -lsicuin -lsicuuc -lAdvapi32" -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib" OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32"
    ```
+   **NOTICE**: **-lAdvapi32** is necessary for static version of ICU, without this lib, the compilation will fail. **-lgdi32** is the same. Don't remove the two libs.
 
 **NOTE**
 
