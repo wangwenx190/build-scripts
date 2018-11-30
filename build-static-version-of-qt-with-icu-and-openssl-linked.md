@@ -6,6 +6,8 @@
 
 ## Build static version of ICU
 
+**From ICU 64, it requires Python 3 to be built.**
+
 32-bit example:
 1. [Download the latest MSYS2](http://www.msys2.org/) and install it. I assume you have installed it to it's default location "C:\msys64".
 2. Open *MSYS2 MSYS* shell and execute the following commands:
@@ -15,21 +17,24 @@
    Close the shell window forcely and open *MSYS2 MSYS* shell again, execute the following commands:
    ```bash
    pacman -Su
-   pacman -S make binutils
+   pacman -S make binutils python3
    ```
 3. Rename "C:\msys64\usr\bin\link.exe" to "link.exe.bak" (only if you have this file).
 4. [Download the latest ICU source code package](http://site.icu-project.org/download) and extract it to anywhere you like. I assume you have extracted it to "C:\ICU\src".
 5. Open cmd shell and execute the following commands (I assume you have installed VS2017 Community to it's default localtion "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"):
    ```bat
+   REM 64 bit: use "x64" instead of "x86"
    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
+   REM 64 bit: use "-mingw64" instead of "-mingw32"
    call "C:\msys64\msys2_shell.cmd" -mingw32 -use-full-path
    ```
    Then execute the following commands:
    ```bash
    cd /C/ICU/src/source
-   ./runConfigureICU MSYS/MSVC --enable-static --disable-shared --prefix=$PWD/../../icu4c-x86-static-msvc2017 CFLAGS=-MT CXXFLAGS=-MT
+   ./runConfigureICU MSYS/MSVC --enable-static --disable-shared --prefix=$PWD/../../icu4c-x86-static-msvc2017
    make -j4 && make install
    ```
+   ICU will link to shared MSVCRT(-MD) for both shared and static builds by default, if you want to link against static MSVCRT, add `CFLAGS=-MT CXXFLAGS=-MT` to the configure parameters.
 
 ## Build static version of OpenSSL
 
