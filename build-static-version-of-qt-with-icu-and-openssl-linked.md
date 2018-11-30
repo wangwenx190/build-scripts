@@ -43,8 +43,8 @@
 ## Build static version of Qt
 
 1. [Download the latest Qt source code package](http://download.qt.io/official_releases/qt/) and extract it to anywhere you like. I assume you have extracted it to "C:\Qt\src".
-2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", replace all "**-MD**" with "**-MT**" and add "**U_STATIC_IMPLEMENTATION**" to "**DEFINES +=**".
-3. [Use the script I offered to generate the batch script file.](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat)
+2. Open "C:\Qt\src\qtbase\mkspecs\common\msvc-desktop.conf", add "**U_STATIC_IMPLEMENTATION**" to "**DEFINES +=**".
+3. [Use the script I offered to generate the batch script file.](https://github.com/wangwenx190/build-scripts/blob/master/win-build-qt.bat), add **-static-runtime** to configure parameters if you want to link to static MSVCRT.
 4. Open the generated *.bat* file, add the following lines to it and put them to their proper position (you may have to change a little bit if necessary):
    ```bat
    SET "_ICU_DIR=C:\ICU\icu4c-static"
