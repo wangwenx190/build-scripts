@@ -59,10 +59,8 @@ REM Intel C++ Compiler(ICC), your only choice is to skip them.
 SET _VS_DEV_CMD_PATH=
 SET _VS_2017_PATH=
 FOR /f "delims=" %%A IN ('"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -property installationPath -latest -requires Microsoft.Component.MSBuild Microsoft.VisualStudio.Component.VC.Tools.x86.x64') DO SET _VS_2017_PATH=%%A
-SET _VS_DEV_CMD_PATH=%_VS_2017_PATH%\Common7\Tools\VsDevCmd.bat
-IF NOT EXIST "%_VS_DEV_CMD_PATH%" ECHO Cannot find [VsDevCmd.bat], if you did't install VS2017 in it's default location, please change this script && GOTO Fin
-SET _VS_ARCH=%_TARGET_ARCH%
-IF /I "%_TARGET_ARCH%" == "x64" SET _VS_ARCH=amd64
+SET _VS_DEV_CMD_PATH=%_VS_2017_PATH%\VC\Auxiliary\Build\vcvarsall.bat
+IF NOT EXIST "%_VS_DEV_CMD_PATH%" ECHO Cannot find [vcvarsall.bat], if you did't install VS2017 in it's default location, please change this script && GOTO Fin
 IF /I "%_QT_COMPILER:~0,9%" == "win32-icc" SET "_VS_DEV_CMD_PATH=%ProgramFiles(x86)%\IntelSWTools\compilers_and_libraries\windows\bin\ipsxe-comp-vars.bat"
 IF NOT EXIST "%_VS_DEV_CMD_PATH%" ECHO You are using Intel C++ Compiler, however, this script cannot find [ipsxe-comp-vars.bat], if you didn't install ICC in it's default location, please change this script && GOTO Fin
 REM Cross compile example for i686-w64-mingw32-g++(MinGW-w64):
@@ -168,7 +166,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO TITLE Building Qt from source code
     @ECHO CLS
     @ECHO SETLOCAL
-    IF /I "%_QT_COMPILER:~-3%" NEQ "g++" @ECHO CALL "%_VS_DEV_CMD_PATH%" -no_logo -arch=%_VS_ARCH%
+    IF /I "%_QT_COMPILER:~-3%" NEQ "g++" @ECHO CALL "%_VS_DEV_CMD_PATH%" %_TARGET_ARCH%
     @ECHO SET "PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%%PATH%%"
     @ECHO REM SET "_ICU_DIR="
     @ECHO REM SET "_OPENSSL_DIR="
