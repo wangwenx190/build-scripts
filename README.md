@@ -105,6 +105,9 @@ A Windows batch script to help you compile Qt from source code. You should know 
      -openssl-linked -I "%_OPENSSL_DIR%\include" -L "%_OPENSSL_DIR%\lib"
      REM Add OPENSSL_LIBS="-llibcrypto -llibssl -lgdi32" to it
      REM if you are building static version of Qt
+     REM If you want Qt to load OpenSSL dynamically
+     REM instead of linking to it directly, use "-openssl"
+     REM instead of "-openssl-linked"
      ```
    Note:
    - ICU will increase the size of your application for 20~30 MB, if you don't need it then do not link against it, that's also what the Qt Company already did.
