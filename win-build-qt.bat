@@ -168,7 +168,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO TITLE Building Qt from source code
     @ECHO CLS
     @ECHO SETLOCAL
-    IF /I "%_QT_COMPILER:~-3%" NEQ "g++" @ECHO CALL "%_VS_DEV_CMD_PATH%" %_VS_ARCH%
+    IF /I "%_QT_COMPILER:~-3%" NEQ "g++" @ECHO CALL "%_VS_DEV_CMD_PATH%" -no_logo -arch=%_VS_ARCH%
     @ECHO SET "PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%%PATH%%"
     @ECHO REM SET "_ICU_DIR="
     @ECHO REM SET "_OPENSSL_DIR="
