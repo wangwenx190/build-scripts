@@ -9,10 +9,11 @@ SET "_EXE_FILE_PATH=%2"
 IF /I "%_EXE_FILE_PATH%" == "" ECHO Application exe not found && GOTO Fin
 SET "_EXE_DIR_PATH=%3"
 IF /I "%_EXE_DIR_PATH%" == "" ECHO Application dir not found && GOTO Fin
-IF /I "%4" == "" (
+SET "_QML_FILE_PATH=%4"
+IF /I "%_QML_FILE_PATH%" == "" (
     SET _DEP_PARAMS=--plugindir "%_EXE_DIR_PATH%\plugins" --force --compiler-runtime "%_EXE_FILE_PATH%"
 ) ELSE (
-    SET _DEP_PARAMS=--dir "%_EXE_DIR_PATH%\qml" --libdir "%_EXE_DIR_PATH%" --plugindir "%_EXE_DIR_PATH%\plugins" --force --qmldir "%_QT_DIR_PATH%\qml" --compiler-runtime "%_EXE_FILE_PATH%"
+    SET _DEP_PARAMS=--dir "%_EXE_DIR_PATH%\qml" --libdir "%_EXE_DIR_PATH%" --plugindir "%_EXE_DIR_PATH%\plugins" --force --qmldir "%_QML_FILE_PATH%" --compiler-runtime "%_EXE_FILE_PATH%"
 )
 SET "PATH=%_QT_DIR_PATH%\bin;%PATH%"
 IF EXIST "%_EXE_DIR_PATH%\plugins" RD /S /Q "%_EXE_DIR_PATH%\plugins"

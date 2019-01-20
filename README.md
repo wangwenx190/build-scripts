@@ -140,11 +140,11 @@ A Windows batch script to help you deploy your Qt applications. This script is m
    - Option1: The install directory's path of Qt (not the "bin" directory, it's the host directory)
    - Option2: The path of your application's executable file
    - Option3: The path of the directory of your application's executable file
-   - Option4: If your application is not an Qt Quick application, leave this option empty
+   - Option4: The path of the directory of your .qml files if your application is a Qt Quick application, otherwise leave it empty
 
 *Example*
 ```bat
-CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\Code\MyApp\bin64\release\app.exe" "C:\Code\MyApp\bin64\release" qml(or anything else you like)
+CALL "C:\Code\MyApp\win-deploy-qt.bat" "C:\Qt\Qt5.11.0\5.11.0\msvc2017_64" "C:\Code\MyApp\bin64\release\app.exe" "C:\Code\MyApp\bin64\release" "C:\Code\MyApp\src\qml"
 ```
 
 **Tested on**
