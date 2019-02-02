@@ -177,11 +177,7 @@ IF EXIST "%_BUILD_BAT%" DEL /F /Q "%_BUILD_BAT%"
     @ECHO CALL "%_CFG_BAT%" %_CFG_PARAMS%
     @ECHO REM CALL "%_CFG_BAT%" %_CFG_PARAMS% -icu -I "%%_ICU_DIR%%\include" -L "%%_ICU_DIR%%\lib" -openssl-linked -I "%%_OPENSSL_DIR%%\include" -L "%%_OPENSSL_DIR%%\lib"
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
-    IF /I "%_QT_COMPILER:~-3%" == "g++" (
-        @ECHO %_MAKE_TOOL% -j 4 ^&^& %_MAKE_TOOL% install
-    ) ELSE (
-        @ECHO %_MAKE_TOOL% ^&^& %_MAKE_TOOL% install
-    )
+    @ECHO %_MAKE_TOOL% ^&^& %_MAKE_TOOL% install
     @ECHO IF %%ERRORLEVEL%% NEQ 0 GOTO ErrHappen
     @ECHO IF EXIST "%_D3D_COMPILER_XX_DLL%" COPY /Y "%_D3D_COMPILER_XX_DLL%" "%_INSTALL_DIR%\bin\d3dcompiler_47.dll"
     @ECHO REM Remember to download "opengl32sw.dll" from "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/".
