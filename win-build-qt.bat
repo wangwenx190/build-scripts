@@ -118,7 +118,6 @@ REM If you have to use nmake, you can pass "-mp" to configure command line,
 REM which can use multiple processors for compilation, and remember to
 REM remove "-make-tool jom" and replace all "jom" with "nmake" in your script.
 SET "_MAKE_TOOL=jom"
-IF /I "%_QT_COMPILER:~-3%" == "g++" SET "_MAKE_TOOL=mingw32-make"
 SET "_D3D_COMPILER_XX_DLL=%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\%_TARGET_ARCH%\d3dcompiler_47.dll"
 TITLE Configure finished
 CLS
